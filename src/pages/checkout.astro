@@ -1,0 +1,218 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Checkout — Natural ByRoos" hideNav={false} hideFooter={true}>
+  <main class="pt-24 min-h-screen" style="background: var(--color-cream);">
+    <div class="max-w-[1440px] mx-auto px-6 lg:px-12 py-12 lg:py-16">
+
+      <div class="mb-12">
+        <a href="/winkelmand" class="text-[11px] uppercase tracking-[0.15em] flex items-center gap-1.5 mb-6" style="color: var(--color-muted); font-family: var(--font-body);">
+          <svg class="w-3 h-3" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M17 10a.75.75 0 01-.75.75H5.612l4.158 3.96a.75.75 0 11-1.04 1.08l-5.5-5.25a.75.75 0 010-1.08l5.5-5.25a.75.75 0 111.04 1.08L5.612 9.25H16.25A.75.75 0 0117 10z" clip-rule="evenodd"/></svg>
+          Terug naar winkelmand
+        </a>
+        <h1 class="text-[clamp(2rem,5vw,4rem)] leading-[1.05]" style="font-family: var(--font-heading); color: var(--color-ink); font-weight: 300;">
+          Afrekenen
+        </h1>
+      </div>
+
+      <div id="checkout-content" class="grid lg:grid-cols-12 gap-10 lg:gap-16">
+
+        <!-- Left: forms -->
+        <div class="lg:col-span-7 space-y-10">
+
+          <!-- Step 1: Contact -->
+          <section class="rounded-[2px] p-7 lg:p-8" style="background: var(--color-white);">
+            <div class="flex items-center justify-between mb-6">
+              <h2 class="text-2xl" style="font-family: var(--font-heading); color: var(--color-ink); font-weight: 400;">01 · Contactgegevens</h2>
+              <span class="text-[10px] uppercase tracking-[0.15em]" style="color: var(--color-sage); font-family: var(--font-body);">Verplicht</span>
+            </div>
+            <div class="space-y-4">
+              <div class="grid sm:grid-cols-2 gap-4">
+                <input type="text" placeholder="Voornaam" class="w-full px-4 py-3 text-sm bg-transparent rounded-[2px] border outline-none transition-colors" style="border-color: var(--color-sand-dark); color: var(--color-ink); font-family: var(--font-body);" onfocus="this.style.borderColor='var(--color-forest)'" onblur="this.style.borderColor='var(--color-sand-dark)'" />
+                <input type="text" placeholder="Achternaam" class="w-full px-4 py-3 text-sm bg-transparent rounded-[2px] border outline-none transition-colors" style="border-color: var(--color-sand-dark); color: var(--color-ink); font-family: var(--font-body);" onfocus="this.style.borderColor='var(--color-forest)'" onblur="this.style.borderColor='var(--color-sand-dark)'" />
+              </div>
+              <input type="email" placeholder="E-mailadres" class="w-full px-4 py-3 text-sm bg-transparent rounded-[2px] border outline-none transition-colors" style="border-color: var(--color-sand-dark); color: var(--color-ink); font-family: var(--font-body);" onfocus="this.style.borderColor='var(--color-forest)'" onblur="this.style.borderColor='var(--color-sand-dark)'" />
+              <input type="tel" placeholder="Telefoonnummer" class="w-full px-4 py-3 text-sm bg-transparent rounded-[2px] border outline-none transition-colors" style="border-color: var(--color-sand-dark); color: var(--color-ink); font-family: var(--font-body);" onfocus="this.style.borderColor='var(--color-forest)'" onblur="this.style.borderColor='var(--color-sand-dark)'" />
+            </div>
+          </section>
+
+          <!-- Step 2: Delivery method -->
+          <section class="rounded-[2px] p-7 lg:p-8" style="background: var(--color-white);">
+            <h2 class="text-2xl mb-6" style="font-family: var(--font-heading); color: var(--color-ink); font-weight: 400;">02 · Bezorging</h2>
+
+            <div class="space-y-3">
+              {[
+                { val: 'pickup-grijpskerke', name: 'Afhalen Grijpskerke', desc: 'Atelier · op afspraak', price: 'Gratis', selected: true },
+                { val: 'pickup-kloetinge', name: 'Afhalen Kloetinge', desc: 'Bij Zoutgrot Zeeland', price: 'Gratis' },
+                { val: 'pickup-burgh', name: 'Afhalen Burgh-Haamstede', desc: 'Op afspraak', price: 'Gratis' },
+                { val: 'shipping', name: 'Verzenden via PostNL', desc: '1–2 werkdagen', price: '€4,95' },
+              ].map(opt => (
+                <label class={`delivery-option flex items-center gap-4 p-4 rounded-[2px] border cursor-pointer transition-all ${opt.selected ? 'active' : ''}`}
+                       style={`border-color: ${opt.selected ? 'var(--color-forest)' : 'var(--color-sand-dark)'}; background: ${opt.selected ? 'var(--color-cream)' : 'var(--color-white)'};`}>
+                  <input type="radio" name="delivery" value={opt.val} checked={opt.selected} class="w-4 h-4 accent-forest" />
+                  <div class="flex-1">
+                    <p class="text-sm" style="font-family: var(--font-body); color: var(--color-ink); font-weight: 500;">{opt.name}</p>
+                    <p class="text-xs mt-0.5" style="color: var(--color-muted); font-family: var(--font-body);">{opt.desc}</p>
+                  </div>
+                  <span class="text-sm" style="color: var(--color-forest); font-family: var(--font-heading);">{opt.price}</span>
+                </label>
+              ))}
+            </div>
+          </section>
+
+          <!-- Step 3: Payment -->
+          <section class="rounded-[2px] p-7 lg:p-8" style="background: var(--color-white);">
+            <h2 class="text-2xl mb-6" style="font-family: var(--font-heading); color: var(--color-ink); font-weight: 400;">03 · Betaalmethode</h2>
+
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
+              {[
+                { name: 'iDEAL', selected: true },
+                { name: 'Bancontact' },
+                { name: 'Apple Pay' },
+                { name: 'PayPal' },
+              ].map(p => (
+                <button type="button" class={`payment-option py-4 rounded-[2px] border text-sm transition-all ${p.selected ? 'active' : ''}`}
+                        style={`border-color: ${p.selected ? 'var(--color-forest)' : 'var(--color-sand-dark)'}; background: ${p.selected ? 'var(--color-cream)' : 'var(--color-white)'}; font-family: var(--font-body); color: var(--color-ink);`}>
+                  {p.name}
+                </button>
+              ))}
+            </div>
+
+            <p class="text-[11px] flex items-center gap-2" style="color: var(--color-muted); font-family: var(--font-body);">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5A4.5 4.5 0 0010 1zm3 8V5.5a3 3 0 10-6 0V9h6z" clip-rule="evenodd"/></svg>
+              Beveiligde betaling via Mollie · SSL versleuteld
+            </p>
+          </section>
+
+          <!-- Place order button (mobile) -->
+          <button id="place-order" class="btn-primary w-full justify-center text-base py-5 lg:hidden">
+            Bestelling plaatsen
+          </button>
+        </div>
+
+        <!-- Right: order summary -->
+        <aside class="lg:col-span-5">
+          <div class="rounded-[2px] p-7 lg:p-8 sticky top-32" style="background: var(--color-white);">
+            <h2 class="text-xl mb-6" style="font-family: var(--font-heading); color: var(--color-ink); font-weight: 400;">Jouw bestelling</h2>
+
+            <div id="checkout-items" class="space-y-4 mb-6 pb-6 border-b" style="border-color: var(--color-sand);"></div>
+
+            <div class="space-y-2 mb-4">
+              <div class="flex justify-between text-sm" style="font-family: var(--font-body);">
+                <span style="color: var(--color-muted);">Subtotaal</span>
+                <span id="checkout-subtotal" style="color: var(--color-ink);">€0,00</span>
+              </div>
+              <div class="flex justify-between text-sm" style="font-family: var(--font-body);">
+                <span style="color: var(--color-muted);">Bezorging</span>
+                <span id="checkout-shipping" style="color: var(--color-ink);">Gratis</span>
+              </div>
+            </div>
+
+            <div class="flex justify-between items-baseline pt-4 border-t mb-6" style="border-color: var(--color-sand-dark);">
+              <span class="text-base font-medium" style="color: var(--color-ink); font-family: var(--font-body);">Totaal</span>
+              <div class="text-right">
+                <span id="checkout-total" class="block text-3xl" style="color: var(--color-forest); font-family: var(--font-heading); font-weight: 400;">€0,00</span>
+                <span class="text-[10px] uppercase tracking-[0.15em]" style="color: var(--color-muted); font-family: var(--font-body);">Inclusief btw</span>
+              </div>
+            </div>
+
+            <button id="place-order-desk" class="btn-primary w-full justify-center text-base py-4 hidden lg:flex">
+              Bestelling plaatsen
+            </button>
+
+            <p class="text-[11px] text-center mt-4" style="color: var(--color-muted); font-family: var(--font-body);">
+              Door af te rekenen ga je akkoord met de algemene voorwaarden
+            </p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<script is:inline>
+(function() {
+  const SHIPPING_COST = 4.95;
+  const fmt = n => '€' + n.toFixed(2).replace('.', ',');
+  let shipping = 0;
+
+  // Delivery option selection
+  document.querySelectorAll('.delivery-option').forEach(opt => {
+    opt.addEventListener('click', () => {
+      document.querySelectorAll('.delivery-option').forEach(o => {
+        o.style.borderColor = 'var(--color-sand-dark)';
+        o.style.background = 'var(--color-white)';
+      });
+      opt.style.borderColor = 'var(--color-forest)';
+      opt.style.background = 'var(--color-cream)';
+      const radio = opt.querySelector('input');
+      radio.checked = true;
+      shipping = radio.value === 'shipping' ? SHIPPING_COST : 0;
+      render();
+    });
+  });
+
+  // Payment selection
+  document.querySelectorAll('.payment-option').forEach(opt => {
+    opt.addEventListener('click', () => {
+      document.querySelectorAll('.payment-option').forEach(o => {
+        o.style.borderColor = 'var(--color-sand-dark)';
+        o.style.background = 'var(--color-white)';
+      });
+      opt.style.borderColor = 'var(--color-forest)';
+      opt.style.background = 'var(--color-cream)';
+    });
+  });
+
+  function render() {
+    const cart = window.NBRCart?.get() || [];
+    const itemsEl = document.getElementById('checkout-items');
+
+    if (cart.length === 0) {
+      window.location.href = '/winkelmand';
+      return;
+    }
+
+    itemsEl.innerHTML = '';
+    cart.forEach(item => {
+      const row = document.createElement('div');
+      row.className = 'flex gap-3';
+      row.innerHTML = `
+        <div class="w-14 h-14 rounded-[2px] overflow-hidden flex-shrink-0 relative" style="background: var(--color-sand);">
+          <img src="${item.image}" class="w-full h-full object-cover" />
+          <span class="absolute -top-1 -right-1 w-5 h-5 rounded-full text-[10px] font-semibold flex items-center justify-center text-white" style="background: var(--color-forest); font-family: var(--font-body);">${item.qty}</span>
+        </div>
+        <div class="flex-1 min-w-0">
+          <p class="text-sm leading-snug truncate" style="font-family: var(--font-body); color: var(--color-ink);">${item.name}</p>
+          ${item.customisation && item.customisation.text ? `<p class="text-[10px] italic" style="color: var(--color-sage); font-family: var(--font-body);">"${item.customisation.text}"</p>` : ''}
+        </div>
+        <span class="text-sm flex-shrink-0" style="color: var(--color-ink); font-family: var(--font-body);">${fmt(item.price * item.qty)}</span>
+      `;
+      itemsEl.appendChild(row);
+    });
+
+    const subtotal = window.NBRCart.subtotal();
+    document.getElementById('checkout-subtotal').textContent = fmt(subtotal);
+    document.getElementById('checkout-shipping').textContent = shipping === 0 ? 'Gratis' : fmt(shipping);
+    document.getElementById('checkout-total').textContent = fmt(subtotal + shipping);
+  }
+
+  // Place order
+  function placeOrder() {
+    // Clear cart
+    localStorage.setItem('nbr_cart', '[]');
+    localStorage.setItem('nbr_last_order', JSON.stringify({
+      total: window.NBRCart.subtotal() + shipping,
+      items: window.NBRCart.get(),
+      date: new Date().toISOString(),
+    }));
+    window.location.href = '/bedankt';
+  }
+  document.getElementById('place-order')?.addEventListener('click', placeOrder);
+  document.getElementById('place-order-desk')?.addEventListener('click', placeOrder);
+
+  document.addEventListener('DOMContentLoaded', render);
+  window.addEventListener('cart:updated', render);
+})();
+</script>

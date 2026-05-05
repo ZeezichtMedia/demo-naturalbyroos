@@ -1,0 +1,76 @@
+---
+import type { Product } from '../data/products';
+interface Props {
+  product: Product;
+}
+const { product } = Astro.props;
+const productJson = JSON.stringify({
+  slug: product.slug,
+  name: product.name,
+  price: product.price,
+  image: product.image,
+});
+---
+
+<article class="group relative">
+  <a href={`/shop/${product.slug}`} class="block">
+    <div class="relative aspect-square mb-4 overflow-hidden rounded-[2px]" style="background: var(--color-white);">
+      <img src={product.image} alt={product.name}
+           class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+
+      <!-- Badges -->
+      <div class="absolute top-3 left-3 flex flex-col gap-1.5">
+        {product.isBestseller && (
+          <span class="text-[10px] uppercase tracking-[0.18em] px-2.5 py-1 rounded-[2px] font-medium"
+                style="background: var(--color-white); color: var(--color-ink); font-family: var(--font-body);">
+            Bestseller
+          </span>
+        )}
+        {product.isNew && (
+          <span class="text-[10px] uppercase tracking-[0.18em] px-2.5 py-1 rounded-[2px] font-medium"
+                style="background: var(--color-amber); color: var(--color-white); font-family: var(--font-body);">
+            Nieuw
+          </span>
+        )}
+        {product.isPersonalisable && (
+          <span class="text-[10px] uppercase tracking-[0.18em] px-2.5 py-1 rounded-[2px] font-medium"
+                style="background: var(--color-forest); color: var(--color-white); font-family: var(--font-body);">
+            Op maat
+          </span>
+        )}
+      </div>
+    </div>
+  </a>
+
+  <!-- Quick add button (overlay) -->
+  <button data-quick-add={productJson}
+          class="absolute top-3 right-3 w-9 h-9 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-300 hover:scale-110"
+          style="background: var(--color-white); box-shadow: 0 4px 12px rgba(0,0,0,0.1);"
+          aria-label="Snel toevoegen">
+    <svg class="w-4 h-4" style="color: var(--color-forest);" viewBox="0 0 20 20" fill="currentColor"><path d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z"/></svg>
+  </button>
+
+  <a href={`/shop/${product.slug}`} class="block space-y-1">
+    <p class="text-[10px] uppercase tracking-[0.15em]" style="color: var(--color-sage); font-family: var(--font-body);">{product.brand}</p>
+    <h3 class="text-base leading-snug" style="color: var(--color-ink); font-family: var(--font-body); font-weight: 500;">{product.name}</h3>
+    <div class="flex items-center justify-between pt-1">
+      <p class="text-base" style="color: var(--color-forest); font-family: var(--font-heading);">€{product.price.toFixed(2).replace('.', ',')}</p>
+      {product.tags && product.tags[0] && (
+        <span class="text-[10px] uppercase tracking-[0.1em]" style="color: var(--color-muted); font-family: var(--font-body);">{product.tags[0]}</span>
+      )}
+    </div>
+  </a>
+</article>
+
+<script is:inline>
+  document.querySelectorAll('[data-quick-add]').forEach(btn => {
+    if (btn.dataset.bound) return;
+    btn.dataset.bound = '1';
+    btn.addEventListener('click', e => {
+      e.preventDefault();
+      e.stopPropagation();
+      const product = JSON.parse(btn.dataset.quickAdd);
+      window.NBRCart?.add(product, 1);
+    });
+  });
+</script>

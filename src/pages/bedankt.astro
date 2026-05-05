@@ -1,0 +1,105 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Bedankt voor je bestelling — Natural ByRoos">
+  <main class="pt-24 min-h-screen flex items-center" style="background: var(--color-cream);">
+    <div class="max-w-2xl mx-auto px-6 py-20 text-center">
+
+      <!-- Animated checkmark -->
+      <div class="w-20 h-20 mx-auto mb-8 rounded-full flex items-center justify-center animate-pulse-once" style="background: var(--color-sage-light);">
+        <svg class="w-10 h-10 animate-draw" style="color: var(--color-forest);" viewBox="0 0 20 20" fill="none">
+          <path d="M5 10.5l3.5 3.5 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <span class="section-label block mb-4">Bevestiging</span>
+      <h1 class="text-[clamp(2.5rem,6vw,5rem)] leading-[1.05] mb-6" style="font-family: var(--font-heading); color: var(--color-ink); font-weight: 300;">
+        Bedankt voor<br/><em style="color: var(--color-forest);">je bestelling.</em>
+      </h1>
+
+      <p class="text-base lg:text-lg leading-[1.7] max-w-md mx-auto mb-10" style="color: var(--color-ink-soft); font-family: var(--font-body); font-weight: 300;">
+        Je ontvangt binnen een paar minuten een bevestiging in je inbox. We gaan zorgvuldig aan de slag met jouw bestelling.
+      </p>
+
+      <!-- Order details -->
+      <div id="order-details" class="rounded-[2px] p-6 lg:p-8 mb-10 text-left max-w-md mx-auto hidden" style="background: var(--color-white);">
+        <div class="flex justify-between items-center mb-4 pb-4 border-b" style="border-color: var(--color-sand-dark);">
+          <div>
+            <p class="text-[10px] uppercase tracking-[0.15em]" style="color: var(--color-muted); font-family: var(--font-body);">Bestelnummer</p>
+            <p id="order-number" class="text-sm" style="color: var(--color-ink); font-family: var(--font-body); font-weight: 500;">#NBR-0000</p>
+          </div>
+          <div class="text-right">
+            <p class="text-[10px] uppercase tracking-[0.15em]" style="color: var(--color-muted); font-family: var(--font-body);">Totaal</p>
+            <p id="order-total" class="text-xl" style="color: var(--color-forest); font-family: var(--font-heading);">€0,00</p>
+          </div>
+        </div>
+        <div id="order-items" class="space-y-2 text-sm" style="font-family: var(--font-body);"></div>
+      </div>
+
+      <!-- Next steps -->
+      <div class="rounded-[2px] p-6 lg:p-8 mb-10 max-w-md mx-auto text-left" style="background: var(--color-white);">
+        <h3 class="text-lg mb-4" style="font-family: var(--font-heading); color: var(--color-ink); font-weight: 400;">Wat gebeurt er nu?</h3>
+        <ol class="space-y-3 text-sm" style="color: var(--color-ink-soft); font-family: var(--font-body);">
+          {[
+            'Je krijgt direct een e-mail bevestiging',
+            'Roos verwerkt je bestelling persoonlijk',
+            'Je krijgt bericht zodra alles klaarstaat',
+          ].map((step, idx) => (
+            <li class="flex items-start gap-3">
+              <span class="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-[11px] font-semibold" style="background: var(--color-cream); color: var(--color-forest); font-family: var(--font-body);">{idx + 1}</span>
+              <span>{step}</span>
+            </li>
+          ))}
+        </ol>
+      </div>
+
+      <div class="flex flex-wrap justify-center gap-3">
+        <a href="/" class="btn-primary">Terug naar home</a>
+        <a href="/shop" class="btn-outline">Verder shoppen</a>
+      </div>
+
+      <p class="text-xs mt-12" style="color: var(--color-muted); font-family: var(--font-body);">
+        Vragen? Mail <a href="mailto:info@naturalbyroos.nl" class="underline" style="color: var(--color-forest);">info@naturalbyroos.nl</a> of bel 06-30 25 76 17
+      </p>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  @keyframes pulse-once {
+    0% { transform: scale(0); opacity: 0; }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  @keyframes draw {
+    0% { stroke-dasharray: 30; stroke-dashoffset: 30; }
+    100% { stroke-dasharray: 30; stroke-dashoffset: 0; }
+  }
+  .animate-pulse-once { animation: pulse-once 0.6s ease-out forwards; }
+  .animate-draw path { animation: draw 0.6s ease-out 0.3s both; }
+</style>
+
+<script is:inline>
+(function() {
+  const fmt = n => '€' + n.toFixed(2).replace('.', ',');
+  const order = JSON.parse(localStorage.getItem('nbr_last_order') || 'null');
+
+  if (order) {
+    document.getElementById('order-details').classList.remove('hidden');
+    document.getElementById('order-number').textContent = '#NBR-' + Math.floor(1000 + Math.random() * 9000);
+    document.getElementById('order-total').textContent = fmt(order.total);
+
+    const itemsEl = document.getElementById('order-items');
+    order.items.forEach(item => {
+      const row = document.createElement('div');
+      row.className = 'flex justify-between';
+      row.innerHTML = `
+        <span style="color: var(--color-ink-soft);">${item.qty}× ${item.name}</span>
+        <span style="color: var(--color-ink);">${fmt(item.price * item.qty)}</span>
+      `;
+      itemsEl.appendChild(row);
+    });
+  }
+})();
+</script>

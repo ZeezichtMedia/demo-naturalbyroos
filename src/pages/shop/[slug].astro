@@ -1,0 +1,203 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import { products, getProduct, getRelatedProducts } from '../../data/products';
+
+export function getStaticPaths() {
+  return products.map(p => ({ params: { slug: p.slug } }));
+}
+
+const { slug } = Astro.params;
+const product = getProduct(slug!);
+if (!product) return Astro.redirect('/shop');
+const related = getRelatedProducts(slug!);
+const productJson = JSON.stringify({ slug: product.slug, name: product.name, price: product.price, image: product.image });
+const gallery = product.gallery && product.gallery.length > 0 ? product.gallery : [product.image, product.image, product.image];
+---
+
+<Layout title={`${product.name} — Natural ByRoos`}>
+  <main class="pt-24">
+
+    <!-- Breadcrumb -->
+    <div class="max-w-[1440px] mx-auto px-6 lg:px-12 pt-8">
+      <nav class="text-[11px] uppercase tracking-[0.15em]" style="color: var(--color-muted); font-family: var(--font-body);">
+        <a href="/" class="hover:opacity-60">Home</a>
+        <span class="mx-2 opacity-40">/</span>
+        <a href="/shop" class="hover:opacity-60">Shop</a>
+        <span class="mx-2 opacity-40">/</span>
+        <span style="color: var(--color-ink);">{product.name}</span>
+      </nav>
+    </div>
+
+    <!-- PDP Hero -->
+    <section class="py-12 lg:py-20">
+      <div class="max-w-[1440px] mx-auto px-6 lg:px-12">
+        <div class="grid lg:grid-cols-12 gap-8 lg:gap-16">
+
+          <!-- Image gallery -->
+          <div class="lg:col-span-7">
+            <div class="aspect-[4/5] mb-3 overflow-hidden rounded-[2px]" style="background: var(--color-sand);">
+              <img id="main-image" src={gallery[0]} alt={product.name}
+                   class="w-full h-full object-cover transition-opacity duration-300" />
+            </div>
+            <div class="grid grid-cols-4 gap-3">
+              {gallery.slice(0, 4).map((img, idx) => (
+                <button data-thumb={img}
+                        class={`thumb aspect-square overflow-hidden rounded-[2px] border-2 transition-all ${idx === 0 ? 'border-forest' : 'border-transparent'}`}
+                        style={`background: var(--color-sand); border-color: ${idx === 0 ? 'var(--color-forest)' : 'transparent'};`}>
+                  <img src={img} alt="" class="w-full h-full object-cover" />
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <!-- Info -->
+          <div class="lg:col-span-5 lg:py-4">
+            <p class="text-[10px] uppercase tracking-[0.18em] mb-3" style="color: var(--color-sage); font-family: var(--font-body);">{product.brand} · {product.category}</p>
+
+            <h1 class="text-4xl lg:text-5xl mb-5 leading-tight" style="font-family: var(--font-heading); color: var(--color-ink); font-weight: 400;">
+              {product.name}
+            </h1>
+
+            <div class="flex items-baseline gap-4 mb-6">
+              <span class="text-3xl" style="color: var(--color-forest); font-family: var(--font-heading); font-weight: 400;">€{product.price.toFixed(2).replace('.', ',')}</span>
+              {product.weight && (
+                <span class="text-sm" style="color: var(--color-muted); font-family: var(--font-body);">/ {product.weight}</span>
+              )}
+            </div>
+
+            <p class="text-base leading-[1.7] mb-6" style="color: var(--color-ink-soft); font-family: var(--font-body); font-weight: 300;">
+              {product.longDescription || product.description}
+            </p>
+
+            <!-- Tags / metadata -->
+            <div class="space-y-3 py-6 border-y mb-6" style="border-color: var(--color-sand-dark);">
+              {product.scent && (
+                <div class="flex items-baseline gap-3">
+                  <span class="text-[10px] uppercase tracking-[0.15em] w-20" style="color: var(--color-muted); font-family: var(--font-body);">Geur</span>
+                  <span class="text-sm" style="color: var(--color-ink); font-family: var(--font-body);">{product.scent}</span>
+                </div>
+              )}
+              {product.weight && (
+                <div class="flex items-baseline gap-3">
+                  <span class="text-[10px] uppercase tracking-[0.15em] w-20" style="color: var(--color-muted); font-family: var(--font-body);">Gewicht</span>
+                  <span class="text-sm" style="color: var(--color-ink); font-family: var(--font-body);">{product.weight}</span>
+                </div>
+              )}
+              {product.tags && (
+                <div class="flex items-baseline gap-3">
+                  <span class="text-[10px] uppercase tracking-[0.15em] w-20" style="color: var(--color-muted); font-family: var(--font-body);">Kenmerken</span>
+                  <div class="flex flex-wrap gap-1.5">
+                    {product.tags.map(tag => (
+                      <span class="text-[11px] px-2 py-0.5 rounded-[2px] border"
+                            style="color: var(--color-ink-soft); border-color: var(--color-sand-dark); font-family: var(--font-body);">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {product.isPersonalisable && (
+              <div class="rounded-[2px] p-5 mb-6 flex items-start gap-4" style="background: var(--color-sand);">
+                <svg class="w-5 h-5 flex-shrink-0 mt-0.5" style="color: var(--color-forest);" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.5 17a4.5 4.5 0 01-1.44-8.765 4.5 4.5 0 018.302-3.046 3.5 3.5 0 014.504 4.272A4 4 0 0115 17H5.5zm3.75-2.75a.75.75 0 001.5 0V9.66l1.95 2.1a.75.75 0 101.1-1.02l-3.25-3.5a.75.75 0 00-1.1 0l-3.25 3.5a.75.75 0 101.1 1.02l1.95-2.1v4.59z" clip-rule="evenodd"/></svg>
+                <div>
+                  <p class="text-sm font-medium mb-1" style="color: var(--color-ink); font-family: var(--font-body);">Wil je dit op maat?</p>
+                  <p class="text-xs leading-relaxed mb-2" style="color: var(--color-ink-soft); font-family: var(--font-body);">
+                    Voeg een naam, datum of korte tekst toe via onze configurator.
+                  </p>
+                  <a href="/gepersonaliseerd/configurator" class="text-xs font-medium underline" style="color: var(--color-forest); font-family: var(--font-body);">
+                    Open de configurator →
+                  </a>
+                </div>
+              </div>
+            )}
+
+            <!-- Quantity + Add to cart -->
+            <div class="flex gap-3 mb-4">
+              <div class="flex items-center border rounded-full" style="border-color: var(--color-sand-dark);">
+                <button id="qty-decr" class="w-11 h-12 flex items-center justify-center" style="color: var(--color-ink-soft);">−</button>
+                <span id="qty-value" class="w-10 text-center text-sm" style="font-family: var(--font-body); color: var(--color-ink);">1</span>
+                <button id="qty-incr" class="w-11 h-12 flex items-center justify-center" style="color: var(--color-ink-soft);">+</button>
+              </div>
+              <button id="add-to-cart" data-product={productJson} class="btn-primary flex-1 justify-center text-sm py-3.5">
+                In winkelmand
+                <svg class="w-3.5 h-3.5" viewBox="0 0 20 20" fill="currentColor"><path d="M1 1.75A.75.75 0 011.75 1h1.628a1.75 1.75 0 011.734 1.51L5.18 3a65.25 65.25 0 0113.36 1.412.75.75 0 01.58.875 48.645 48.645 0 01-1.618 6.2.75.75 0 01-.712.513H6a2.503 2.503 0 00-2.292 1.5H17.25a.75.75 0 010 1.5H2.76a.75.75 0 01-.748-.807 4.002 4.002 0 012.716-3.486L3.626 2.716a.25.25 0 00-.248-.216H1.75A.75.75 0 011 1.75z"/></svg>
+              </button>
+            </div>
+
+            <!-- USPs -->
+            <ul class="space-y-2 pt-4 border-t" style="border-color: var(--color-sand-dark);">
+              {[
+                'Gratis verzending vanaf €35',
+                'Afhalen in Grijpskerke, Kloetinge of Burgh-Haamstede',
+                'Voor 16:00 besteld, morgen in huis (NL)',
+              ].map(usp => (
+                <li class="flex items-center gap-2 text-xs" style="color: var(--color-ink-soft); font-family: var(--font-body);">
+                  <svg class="w-3 h-3" style="color: var(--color-sage);" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd"/></svg>
+                  {usp}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Description block -->
+    {product.ingredients && (
+      <section class="py-16 border-t" style="border-color: var(--color-sand); background: var(--color-cream);">
+        <div class="max-w-3xl mx-auto px-6">
+          <h2 class="text-2xl mb-4" style="font-family: var(--font-heading); color: var(--color-ink); font-weight: 400;">Ingrediënten</h2>
+          <p class="text-sm leading-[1.8]" style="color: var(--color-ink-soft); font-family: var(--font-body); font-weight: 300;">
+            {product.ingredients}
+          </p>
+        </div>
+      </section>
+    )}
+
+    <!-- Related products -->
+    {related.length > 0 && (
+      <section class="py-20 lg:py-28" style="background: var(--color-white);">
+        <div class="max-w-[1440px] mx-auto px-6 lg:px-12">
+          <div class="flex items-end justify-between mb-12">
+            <h2 class="text-3xl lg:text-4xl" style="font-family: var(--font-heading); color: var(--color-ink); font-weight: 300;">
+              Misschien ook iets voor jou
+            </h2>
+            <a href="/shop" class="hidden sm:block text-sm border-b pb-1" style="color: var(--color-ink); font-family: var(--font-body); border-color: var(--color-ink);">
+              Alles bekijken
+            </a>
+          </div>
+          <div class="grid grid-cols-2 lg:grid-cols-4 gap-x-5 gap-y-12">
+            {related.map(p => <ProductCard product={p} />)}
+          </div>
+        </div>
+      </section>
+    )}
+  </main>
+</Layout>
+
+<script is:inline>
+  // Image gallery
+  document.querySelectorAll('[data-thumb]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const src = btn.dataset.thumb;
+      document.getElementById('main-image').src = src;
+      document.querySelectorAll('.thumb').forEach(t => t.style.borderColor = 'transparent');
+      btn.style.borderColor = 'var(--color-forest)';
+    });
+  });
+
+  // Quantity
+  let qty = 1;
+  const qtyEl = document.getElementById('qty-value');
+  document.getElementById('qty-incr').addEventListener('click', () => { qty++; qtyEl.textContent = qty; });
+  document.getElementById('qty-decr').addEventListener('click', () => { if (qty > 1) qty--; qtyEl.textContent = qty; });
+
+  // Add to cart
+  document.getElementById('add-to-cart').addEventListener('click', e => {
+    const product = JSON.parse(e.currentTarget.dataset.product);
+    window.NBRCart?.add(product, qty);
+  });
+</script>

@@ -2,36 +2,34 @@
 const navItems = [
   {
     label: 'Shop',
-    href: '#shop',
+    href: '/shop',
     dropdown: {
       type: 'shop',
       groups: [
         {
           title: 'Categorieën',
           items: [
-            { label: 'Cadeaus & brievenbus', href: '#cadeaus' },
-            { label: 'Natural ByRoos', href: '#nbr' },
-            { label: 'Loveli', href: '#loveli' },
-            { label: 'Beesha', href: '#beesha' },
-            { label: 'Cosmeau / Bamboozy', href: '#cosmeau' },
-            { label: 'Ben&Anna', href: '#bennanna' },
-            { label: 'Shampoobars', href: '#shampoobars' },
-            { label: 'Accessoires', href: '#accessoires' },
+            { label: 'Alle producten', href: '/shop' },
+            { label: 'Zeep', href: '/shop?cat=zeep' },
+            { label: 'Haarverzorging', href: '/shop?cat=haarverzorging' },
+            { label: 'Lichaamsverzorging', href: '/shop?cat=lichaamsverzorging' },
+            { label: 'Cadeaus', href: '/shop?cat=cadeaus' },
+            { label: 'Cadeaubon', href: '/shop/cadeaubon' },
           ],
         },
       ],
       featured: {
-        image: '/images/shop-display.jpg',
+        image: '/images/giftset.jpg',
         label: 'Bestseller',
-        title: 'Ambachtelijke zeep',
-        price: '€6,50',
-        href: '#shop',
+        title: 'Giftset Natural ByRoos',
+        price: '€24,95',
+        href: '/shop/giftset-natural-byroos',
       },
     },
   },
   {
     label: 'Gepersonaliseerd',
-    href: '#gepersonaliseerd',
+    href: '/gepersonaliseerd',
     badge: 'Nieuw',
     dropdown: {
       type: 'personalised',
@@ -39,10 +37,10 @@ const navItems = [
         {
           title: 'Gepersonaliseerde artikelen',
           items: [
-            { label: 'Zeep op maat', href: '#zeep', desc: 'Naam, logo of boodschap' },
-            { label: 'Zakjes badzout', href: '#badzout', desc: 'Persoonlijk label' },
-            { label: 'Cadeauboxen', href: '#cadeauboxen', desc: 'Samengestelde sets' },
-            { label: 'Voor bedrijven', href: '#zakelijk', desc: 'Relatiegeschenken' },
+            { label: 'Zeep op maat', href: '/gepersonaliseerd/configurator', desc: 'Naam, logo of boodschap' },
+            { label: 'Zakjes badzout', href: '/shop/badzout-zakje-personalised', desc: 'Persoonlijk label' },
+            { label: 'Cadeauboxen', href: '/gepersonaliseerd#cadeauboxen', desc: 'Samengestelde sets' },
+            { label: 'Voor bedrijven', href: '/gepersonaliseerd#zakelijk', desc: 'Relatiegeschenken' },
           ],
         },
       ],
@@ -51,14 +49,13 @@ const navItems = [
         label: 'Op maat gemaakt',
         title: 'Gouden Lavendel zeep "Roosjes"',
         price: 'v.a. €4,50',
-        href: '#zeep',
+        href: '/gepersonaliseerd/configurator',
       },
     },
   },
-  { label: 'Workshops', href: '#workshops' },
-  { label: 'Blog', href: '#blog' },
-  { label: 'Over', href: '#over' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Workshops', href: '/workshops' },
+  { label: 'Over', href: '/over' },
+  { label: 'Contact', href: '/contact' },
 ];
 ---
 
@@ -165,11 +162,11 @@ const navItems = [
         <button class="hidden lg:flex p-2.5 rounded-full transition-colors duration-200 hover:bg-white/50" aria-label="Account">
           <svg class="w-4 h-4" style="color: var(--color-ink-soft);" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/></svg>
         </button>
-        <button class="hidden lg:flex p-2.5 rounded-full transition-colors duration-200 hover:bg-white/50 relative" aria-label="Winkelmand">
+        <button data-cart-open class="hidden lg:flex p-2.5 rounded-full transition-colors duration-200 hover:bg-white/50 relative" aria-label="Winkelmand">
           <svg class="w-4 h-4" style="color: var(--color-ink-soft);" viewBox="0 0 20 20" fill="currentColor"><path d="M1 1.75A.75.75 0 011.75 1h1.628a1.75 1.75 0 011.734 1.51L5.18 3a65.25 65.25 0 0113.36 1.412.75.75 0 01.58.875 48.645 48.645 0 01-1.618 6.2.75.75 0 01-.712.513H6a2.503 2.503 0 00-2.292 1.5H17.25a.75.75 0 010 1.5H2.76a.75.75 0 01-.748-.807 4.002 4.002 0 012.716-3.486L3.626 2.716a.25.25 0 00-.248-.216H1.75A.75.75 0 011 1.75zM6 17.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zm10 0a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"/></svg>
-          <span class="absolute -top-0.5 -right-0.5 w-4 h-4 rounded-full text-[10px] font-semibold flex items-center justify-center text-white" style="background: var(--color-forest);">2</span>
+          <span id="cart-badge" class="absolute -top-0.5 -right-0.5 min-w-[16px] h-4 px-1 rounded-full text-[10px] font-semibold flex items-center justify-center text-white" style="background: var(--color-forest); display: none;">0</span>
         </button>
-        <a href="#contact" class="hidden lg:inline-flex btn-primary text-xs py-2.5 px-5 ml-2">Offerte</a>
+        <a href="/contact" class="hidden lg:inline-flex btn-primary text-xs py-2.5 px-5 ml-2">Offerte</a>
 
         <!-- Mobile hamburger -->
         <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-full" style="color: var(--color-ink);" aria-label="Menu openen">

@@ -1,0 +1,299 @@
+---
+---
+<!-- Toast container -->
+<div id="toast-container" class="fixed top-24 right-6 z-[100] flex flex-col gap-2 pointer-events-none"></div>
+
+<!-- Cart drawer overlay -->
+<div id="cart-overlay" class="fixed inset-0 z-[90] opacity-0 invisible transition-all duration-300"
+     style="background: rgba(28, 28, 28, 0.4); backdrop-filter: blur(4px);"></div>
+
+<!-- Cart drawer -->
+<aside id="cart-drawer" class="fixed top-0 right-0 h-full w-full sm:w-[440px] z-[95] translate-x-full transition-transform duration-400 flex flex-col"
+       style="background: var(--color-cream); box-shadow: -20px 0 60px rgba(0,0,0,0.15);">
+
+  <!-- Header -->
+  <div class="flex items-center justify-between px-6 py-5 border-b" style="border-color: var(--color-sand-dark);">
+    <div>
+      <h2 class="text-2xl" style="font-family: var(--font-heading); color: var(--color-ink); font-weight: 400;">Winkelmand</h2>
+      <p id="cart-count-text" class="text-xs mt-0.5" style="color: var(--color-muted); font-family: var(--font-body);">0 items</p>
+    </div>
+    <button id="cart-close" class="w-10 h-10 rounded-full flex items-center justify-center transition-colors hover:bg-white" aria-label="Sluiten">
+      <svg class="w-4 h-4" style="color: var(--color-ink);" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+    </button>
+  </div>
+
+  <!-- Items -->
+  <div id="cart-items" class="flex-1 overflow-y-auto px-6 py-4">
+    <!-- Empty state -->
+    <div id="cart-empty" class="text-center py-16">
+      <div class="w-16 h-16 mx-auto mb-5 rounded-full flex items-center justify-center" style="background: var(--color-sand);">
+        <svg class="w-7 h-7" style="color: var(--color-sage);" viewBox="0 0 20 20" fill="currentColor"><path d="M1 1.75A.75.75 0 011.75 1h1.628a1.75 1.75 0 011.734 1.51L5.18 3a65.25 65.25 0 0113.36 1.412.75.75 0 01.58.875 48.645 48.645 0 01-1.618 6.2.75.75 0 01-.712.513H6a2.503 2.503 0 00-2.292 1.5H17.25a.75.75 0 010 1.5H2.76a.75.75 0 01-.748-.807 4.002 4.002 0 012.716-3.486L3.626 2.716a.25.25 0 00-.248-.216H1.75A.75.75 0 011 1.75zM6 17.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zm10 0a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"/></svg>
+      </div>
+      <p class="text-base mb-2" style="font-family: var(--font-heading); color: var(--color-ink); font-weight: 400;">Je mandje is nog leeg</p>
+      <p class="text-sm mb-6 max-w-xs mx-auto" style="color: var(--color-muted); font-family: var(--font-body);">
+        Ontdek onze handgemaakte favorieten — duurzaam en op maat.
+      </p>
+      <a href="/shop" class="btn-primary text-xs py-3 px-6">Naar de shop</a>
+    </div>
+  </div>
+
+  <!-- Footer / Totals -->
+  <div id="cart-footer" class="hidden border-t px-6 py-5 space-y-4" style="border-color: var(--color-sand-dark); background: var(--color-white);">
+    <!-- Free shipping progress -->
+    <div id="shipping-bar" class="space-y-1.5">
+      <div class="flex items-center justify-between text-[11px] uppercase tracking-[0.1em]" style="color: var(--color-muted); font-family: var(--font-body);">
+        <span id="shipping-text">Nog €X tot gratis verzending</span>
+        <span id="shipping-pct">0%</span>
+      </div>
+      <div class="h-1 rounded-full overflow-hidden" style="background: var(--color-sand);">
+        <div id="shipping-progress" class="h-full transition-all duration-500" style="background: var(--color-sage); width: 0%;"></div>
+      </div>
+    </div>
+
+    <div class="space-y-1 text-sm" style="font-family: var(--font-body);">
+      <div class="flex justify-between"><span style="color: var(--color-muted);">Subtotaal</span><span id="cart-subtotal" style="color: var(--color-ink);">€0,00</span></div>
+      <div class="flex justify-between"><span style="color: var(--color-muted);">Verzending</span><span id="cart-shipping" style="color: var(--color-ink);">Berekend bij checkout</span></div>
+    </div>
+
+    <div class="flex justify-between items-baseline pt-3 border-t" style="border-color: var(--color-sand-dark);">
+      <span class="text-sm font-medium" style="color: var(--color-ink); font-family: var(--font-body);">Totaal</span>
+      <span id="cart-total" class="text-2xl" style="color: var(--color-forest); font-family: var(--font-heading); font-weight: 400;">€0,00</span>
+    </div>
+
+    <a href="/checkout" class="btn-primary w-full justify-center text-sm py-3.5">
+      Naar de checkout
+      <svg class="w-3.5 h-3.5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clip-rule="evenodd"/></svg>
+    </a>
+
+    <a href="/winkelmand" class="block text-center text-[11px] uppercase tracking-[0.15em] underline" style="color: var(--color-muted); font-family: var(--font-body);">
+      Bekijk volledig winkelmandje
+    </a>
+  </div>
+</aside>
+
+<script is:inline>
+  // Global cart store + UI helpers
+  (function() {
+    const STORAGE_KEY = 'nbr_cart';
+    const FREE_SHIPPING_THRESHOLD = 35;
+
+    function getCart() {
+      try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); }
+      catch { return []; }
+    }
+
+    function setCart(items) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+      window.dispatchEvent(new CustomEvent('cart:updated', { detail: items }));
+    }
+
+    function addItem(product, qty = 1, customisation = null) {
+      const cart = getCart();
+      const key = customisation ? `${product.slug}__${JSON.stringify(customisation)}` : product.slug;
+      const existing = cart.find(i => i.key === key);
+      if (existing) {
+        existing.qty += qty;
+      } else {
+        cart.push({ key, slug: product.slug, name: product.name, price: product.price, image: product.image, qty, customisation });
+      }
+      setCart(cart);
+      showToast(`${product.name} toegevoegd aan je mandje`, product.image);
+      openDrawer();
+    }
+
+    function removeItem(key) {
+      setCart(getCart().filter(i => i.key !== key));
+    }
+
+    function updateQty(key, qty) {
+      const cart = getCart();
+      const item = cart.find(i => i.key === key);
+      if (item) {
+        item.qty = Math.max(1, qty);
+        setCart(cart);
+      }
+    }
+
+    function getSubtotal() {
+      return getCart().reduce((sum, i) => sum + i.price * i.qty, 0);
+    }
+
+    function getCount() {
+      return getCart().reduce((sum, i) => sum + i.qty, 0);
+    }
+
+    function fmt(n) {
+      return '€' + n.toFixed(2).replace('.', ',');
+    }
+
+    function renderDrawer() {
+      const cart = getCart();
+      const itemsEl = document.getElementById('cart-items');
+      const emptyEl = document.getElementById('cart-empty');
+      const footerEl = document.getElementById('cart-footer');
+      const countText = document.getElementById('cart-count-text');
+
+      if (!itemsEl) return;
+      countText.textContent = `${getCount()} ${getCount() === 1 ? 'item' : 'items'}`;
+
+      if (cart.length === 0) {
+        emptyEl.style.display = 'block';
+        footerEl.classList.add('hidden');
+        // Remove existing item rows
+        itemsEl.querySelectorAll('.cart-row').forEach(el => el.remove());
+        return;
+      }
+
+      emptyEl.style.display = 'none';
+      footerEl.classList.remove('hidden');
+      itemsEl.querySelectorAll('.cart-row').forEach(el => el.remove());
+
+      cart.forEach(item => {
+        const row = document.createElement('div');
+        row.className = 'cart-row flex gap-4 py-5 border-b';
+        row.style.borderColor = 'var(--color-sand)';
+        row.innerHTML = `
+          <div class="w-20 h-20 rounded-[2px] overflow-hidden flex-shrink-0" style="background: var(--color-sand);">
+            <img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover" />
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="flex justify-between items-start gap-2">
+              <h3 class="text-sm leading-snug" style="font-family: var(--font-body); color: var(--color-ink); font-weight: 500;">${item.name}</h3>
+              <button data-remove="${item.key}" class="w-6 h-6 flex-shrink-0 flex items-center justify-center -mt-1 -mr-1 opacity-50 hover:opacity-100" aria-label="Verwijderen">
+                <svg class="w-3.5 h-3.5" viewBox="0 0 20 20" fill="currentColor" style="color: var(--color-ink);"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+              </button>
+            </div>
+            ${item.customisation ? `<p class="text-[11px] mt-1 italic" style="color: var(--color-sage); font-family: var(--font-body);">"${item.customisation.text || ''}"${item.customisation.scent ? ` · ${item.customisation.scent}` : ''}</p>` : ''}
+            <div class="flex items-center justify-between mt-3">
+              <div class="flex items-center border rounded-full" style="border-color: var(--color-sand-dark);">
+                <button data-decr="${item.key}" class="w-7 h-7 flex items-center justify-center text-sm" style="color: var(--color-ink-soft);">−</button>
+                <span class="w-7 text-center text-xs" style="font-family: var(--font-body); color: var(--color-ink);">${item.qty}</span>
+                <button data-incr="${item.key}" class="w-7 h-7 flex items-center justify-center text-sm" style="color: var(--color-ink-soft);">+</button>
+              </div>
+              <span class="text-sm" style="color: var(--color-forest); font-family: var(--font-heading); font-weight: 500;">${fmt(item.price * item.qty)}</span>
+            </div>
+          </div>
+        `;
+        itemsEl.appendChild(row);
+      });
+
+      // Update totals
+      const subtotal = getSubtotal();
+      document.getElementById('cart-subtotal').textContent = fmt(subtotal);
+      document.getElementById('cart-total').textContent = fmt(subtotal);
+
+      const remaining = Math.max(0, FREE_SHIPPING_THRESHOLD - subtotal);
+      const pct = Math.min(100, (subtotal / FREE_SHIPPING_THRESHOLD) * 100);
+      document.getElementById('shipping-progress').style.width = pct + '%';
+      document.getElementById('shipping-pct').textContent = Math.round(pct) + '%';
+      document.getElementById('shipping-text').textContent = remaining > 0
+        ? `Nog ${fmt(remaining)} tot gratis verzending`
+        : '✓ Je krijgt gratis verzending';
+
+      // Wire up qty/remove
+      itemsEl.querySelectorAll('[data-incr]').forEach(b => b.addEventListener('click', e => {
+        const key = e.currentTarget.dataset.incr;
+        const it = getCart().find(i => i.key === key);
+        if (it) updateQty(key, it.qty + 1);
+      }));
+      itemsEl.querySelectorAll('[data-decr]').forEach(b => b.addEventListener('click', e => {
+        const key = e.currentTarget.dataset.decr;
+        const it = getCart().find(i => i.key === key);
+        if (it) updateQty(key, it.qty - 1);
+      }));
+      itemsEl.querySelectorAll('[data-remove]').forEach(b => b.addEventListener('click', e => {
+        removeItem(e.currentTarget.dataset.remove);
+      }));
+    }
+
+    function updateNavBadge() {
+      const badge = document.getElementById('cart-badge');
+      if (!badge) return;
+      const count = getCount();
+      badge.textContent = count;
+      badge.style.display = count > 0 ? 'flex' : 'none';
+    }
+
+    function openDrawer() {
+      document.getElementById('cart-overlay').style.opacity = '1';
+      document.getElementById('cart-overlay').style.visibility = 'visible';
+      document.getElementById('cart-drawer').style.transform = 'translateX(0)';
+      document.body.style.overflow = 'hidden';
+      renderDrawer();
+    }
+
+    function closeDrawer() {
+      document.getElementById('cart-overlay').style.opacity = '0';
+      document.getElementById('cart-overlay').style.visibility = 'hidden';
+      document.getElementById('cart-drawer').style.transform = 'translateX(100%)';
+      document.body.style.overflow = '';
+    }
+
+    function showToast(msg, image) {
+      const container = document.getElementById('toast-container');
+      if (!container) return;
+      const toast = document.createElement('div');
+      toast.className = 'toast pointer-events-auto rounded-[2px] shadow-2xl flex items-center gap-3 p-3 pr-5 max-w-sm transform translate-x-full opacity-0 transition-all duration-300';
+      toast.style.background = 'var(--color-white)';
+      toast.style.borderLeft = '3px solid var(--color-sage)';
+      toast.innerHTML = `
+        ${image ? `<img src="${image}" class="w-12 h-12 object-cover rounded-[2px]" />` : ''}
+        <div class="flex-1">
+          <p class="text-[10px] uppercase tracking-[0.18em] mb-0.5" style="color: var(--color-sage); font-family: var(--font-body);">Toegevoegd</p>
+          <p class="text-sm" style="font-family: var(--font-body); color: var(--color-ink);">${msg}</p>
+        </div>
+      `;
+      container.appendChild(toast);
+      requestAnimationFrame(() => {
+        toast.style.transform = 'translateX(0)';
+        toast.style.opacity = '1';
+      });
+      setTimeout(() => {
+        toast.style.transform = 'translateX(120%)';
+        toast.style.opacity = '0';
+        setTimeout(() => toast.remove(), 300);
+      }, 3000);
+    }
+
+    // Expose globally
+    window.NBRCart = {
+      add: addItem,
+      remove: removeItem,
+      updateQty,
+      get: getCart,
+      count: getCount,
+      subtotal: getSubtotal,
+      open: openDrawer,
+      close: closeDrawer,
+      fmt,
+    };
+
+    // Wire up close
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('cart-close')?.addEventListener('click', closeDrawer);
+      document.getElementById('cart-overlay')?.addEventListener('click', closeDrawer);
+      updateNavBadge();
+      renderDrawer();
+    });
+
+    window.addEventListener('cart:updated', () => {
+      renderDrawer();
+      updateNavBadge();
+    });
+
+    // Cart icon click
+    document.addEventListener('click', e => {
+      const trigger = e.target.closest('[data-cart-open]');
+      if (trigger) {
+        e.preventDefault();
+        openDrawer();
+      }
+    });
+  })();
+</script>
+
+<style>
+  #cart-drawer {
+    will-change: transform;
+  }
+</style>

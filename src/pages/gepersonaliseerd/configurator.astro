@@ -1,0 +1,390 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Configurator — Gepersonaliseerde zeep">
+  <main class="pt-20 min-h-screen" style="background: var(--color-cream);">
+
+    <div class="max-w-[1440px] mx-auto px-6 lg:px-12 py-12 lg:py-20">
+
+      <!-- Breadcrumb -->
+      <nav class="text-[11px] uppercase tracking-[0.15em] mb-12" style="color: var(--color-muted); font-family: var(--font-body);">
+        <a href="/" class="hover:opacity-60">Home</a>
+        <span class="mx-2 opacity-40">/</span>
+        <a href="/gepersonaliseerd" class="hover:opacity-60">Gepersonaliseerd</a>
+        <span class="mx-2 opacity-40">/</span>
+        <span style="color: var(--color-ink);">Configurator</span>
+      </nav>
+
+      <div class="grid lg:grid-cols-12 gap-12 lg:gap-16">
+
+        <!-- Left: live preview -->
+        <div class="lg:col-span-7 lg:sticky lg:top-32 lg:self-start">
+          <div class="aspect-[4/5] rounded-[2px] overflow-hidden relative shadow-[0_30px_80px_-20px_rgba(0,0,0,0.25)]"
+               style="background: linear-gradient(135deg, #EDE5D8, #D9CFC2);">
+            <!-- Background image -->
+            <img id="preview-image" src="/images/personalised-soap-real.jpg" alt="Preview"
+                 class="absolute inset-0 w-full h-full object-cover transition-all duration-500" />
+
+            <!-- Overlay label -->
+            <div id="preview-label" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-500">
+              <div class="px-8 py-5 rounded-[2px] backdrop-blur-md text-center min-w-[240px] shadow-2xl"
+                   style="background: rgba(255, 255, 255, 0.92); border: 1px solid rgba(255,255,255,0.6);">
+                <p id="preview-eyebrow" class="text-[9px] uppercase tracking-[0.25em] mb-2" style="color: var(--color-sage); font-family: var(--font-body);">Persoonlijk gemaakt voor</p>
+                <p id="preview-text" class="text-2xl lg:text-3xl leading-tight" style="font-family: var(--font-heading); color: var(--color-ink); font-weight: 400; font-style: italic;">
+                  Jouw naam
+                </p>
+                <p id="preview-date" class="text-[10px] uppercase tracking-[0.2em] mt-3 opacity-0 transition-opacity duration-300" style="color: var(--color-muted); font-family: var(--font-body);"></p>
+              </div>
+            </div>
+
+            <!-- Floating tag -->
+            <div class="absolute top-6 left-6">
+              <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] uppercase tracking-[0.18em]"
+                    style="background: rgba(255,255,255,0.95); color: var(--color-forest); font-family: var(--font-body);">
+                <span class="w-1.5 h-1.5 rounded-full" style="background: var(--color-forest);"></span>
+                Live preview
+              </span>
+            </div>
+
+            <!-- Bottom info bar -->
+            <div class="absolute inset-x-0 bottom-0 p-6 backdrop-blur-md" style="background: rgba(28, 28, 28, 0.7);">
+              <div class="flex items-end justify-between text-white">
+                <div>
+                  <p class="text-[10px] uppercase tracking-[0.2em] opacity-70 mb-1" style="font-family: var(--font-body);">Configuratie</p>
+                  <p id="config-summary" class="text-base" style="font-family: var(--font-heading);">Lavendel · Roos shape · 1 stuk</p>
+                </div>
+                <div class="text-right">
+                  <p class="text-[10px] uppercase tracking-[0.2em] opacity-70 mb-1" style="font-family: var(--font-body);">Totaal</p>
+                  <p id="config-price" class="text-2xl" style="font-family: var(--font-heading);">€4,50</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Image options -->
+          <div class="grid grid-cols-3 gap-3 mt-3">
+            {[
+              { src: '/images/personalised-soap-real.jpg', label: 'Lavendel' },
+              { src: '/images/ambachtelijke-zeep.jpg', label: 'Naturel' },
+              { src: '/images/giftset.jpg', label: 'Cadeauset' },
+            ].map((opt, idx) => (
+              <button data-img-option={opt.src}
+                      class={`img-option aspect-square overflow-hidden rounded-[2px] border-2 transition-all relative ${idx === 0 ? 'border-forest' : 'border-transparent'}`}
+                      style={`background: var(--color-sand); border-color: ${idx === 0 ? 'var(--color-forest)' : 'transparent'};`}>
+                <img src={opt.src} alt={opt.label} class="w-full h-full object-cover" />
+                <span class="absolute inset-x-0 bottom-0 py-1 text-[10px] uppercase tracking-[0.1em] text-white" style="background: rgba(0,0,0,0.55); font-family: var(--font-body);">{opt.label}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <!-- Right: form -->
+        <div class="lg:col-span-5">
+
+          <div class="flex items-center gap-3 mb-6">
+            <span class="block w-10 h-px" style="background: var(--color-sage);"></span>
+            <span class="section-label">Configurator</span>
+          </div>
+          <h1 class="text-4xl lg:text-5xl leading-[1.05] mb-4" style="font-family: var(--font-heading); color: var(--color-ink); font-weight: 300;">
+            Maak het<br/><em style="color: var(--color-forest);">helemaal van jou.</em>
+          </h1>
+          <p class="text-base leading-[1.7] mb-10" style="color: var(--color-ink-soft); font-family: var(--font-body); font-weight: 300;">
+            Stel jouw zeep zelf samen — kies vorm, geur, en voeg een persoonlijke tekst toe. Wat je rechts ziet is precies wat je krijgt.
+          </p>
+
+          <!-- Step 1: Shape -->
+          <div class="mb-10">
+            <div class="flex items-baseline justify-between mb-4">
+              <h2 class="text-xl" style="font-family: var(--font-heading); color: var(--color-ink); font-weight: 400;">01 · Vorm</h2>
+              <span id="shape-label" class="text-xs" style="color: var(--color-muted); font-family: var(--font-body);">Roos</span>
+            </div>
+            <div class="grid grid-cols-4 gap-2">
+              {[
+                { name: 'Roos', icon: '✿', extra: 0 },
+                { name: 'Hart', icon: '♥', extra: 0 },
+                { name: 'Rond', icon: '●', extra: 0 },
+                { name: 'Vierkant', icon: '■', extra: 0 },
+              ].map((shape, idx) => (
+                <button data-shape={shape.name} data-shape-extra={shape.extra}
+                        class={`shape-btn aspect-square rounded-[2px] border flex flex-col items-center justify-center gap-1 transition-all ${idx === 0 ? 'active' : ''}`}
+                        style={`border-color: ${idx === 0 ? 'var(--color-forest)' : 'var(--color-sand-dark)'}; background: ${idx === 0 ? 'var(--color-cream)' : 'var(--color-white)'};`}>
+                  <span class="text-2xl" style="color: var(--color-forest);">{shape.icon}</span>
+                  <span class="text-[11px]" style="color: var(--color-ink-soft); font-family: var(--font-body);">{shape.name}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <!-- Step 2: Scent -->
+          <div class="mb-10">
+            <div class="flex items-baseline justify-between mb-4">
+              <h2 class="text-xl" style="font-family: var(--font-heading); color: var(--color-ink); font-weight: 400;">02 · Geur</h2>
+              <span id="scent-label" class="text-xs" style="color: var(--color-muted); font-family: var(--font-body);">Lavendel</span>
+            </div>
+            <div class="grid grid-cols-2 gap-2">
+              {[
+                { name: 'Lavendel', desc: 'Rustgevend, klassiek', extra: 0, color: '#C8B6E0' },
+                { name: 'Roos', desc: 'Bloemig, vrouwelijk', extra: 0.5, color: '#E0B6C8' },
+                { name: 'Eucalyptus', desc: 'Fris, zuiverend', extra: 0, color: '#B6E0C8' },
+                { name: 'Citrus', desc: 'Energiek, fruitig', extra: 0, color: '#E0D8B6' },
+                { name: 'Sandelhout', desc: 'Warm, houtig', extra: 1, color: '#C8A87A' },
+                { name: 'Geurloos', desc: 'Voor gevoelige huid', extra: 0, color: '#E8E0D0' },
+              ].map((scent, idx) => (
+                <button data-scent={scent.name} data-scent-extra={scent.extra}
+                        class={`scent-btn flex items-center gap-3 p-3 rounded-[2px] border text-left transition-all ${idx === 0 ? 'active' : ''}`}
+                        style={`border-color: ${idx === 0 ? 'var(--color-forest)' : 'var(--color-sand-dark)'}; background: ${idx === 0 ? 'var(--color-cream)' : 'var(--color-white)'};`}>
+                  <span class="w-7 h-7 rounded-full flex-shrink-0" style={`background: ${scent.color};`}></span>
+                  <div class="min-w-0">
+                    <p class="text-sm leading-tight" style="font-family: var(--font-body); color: var(--color-ink); font-weight: 500;">{scent.name}</p>
+                    <p class="text-[10px] mt-0.5 leading-tight" style="color: var(--color-muted); font-family: var(--font-body);">{scent.desc}</p>
+                  </div>
+                  {scent.extra > 0 && (
+                    <span class="ml-auto text-[10px] flex-shrink-0" style="color: var(--color-amber); font-family: var(--font-body);">+€{scent.extra.toFixed(2).replace('.', ',')}</span>
+                  )}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <!-- Step 3: Personalisation text -->
+          <div class="mb-10">
+            <div class="flex items-baseline justify-between mb-4">
+              <h2 class="text-xl" style="font-family: var(--font-heading); color: var(--color-ink); font-weight: 400;">03 · Tekst</h2>
+              <span id="char-counter" class="text-xs" style="color: var(--color-muted); font-family: var(--font-body);">0 / 24</span>
+            </div>
+            <input id="personal-text" type="text" maxlength="24" placeholder="Naam, datum of korte tekst"
+                   class="w-full px-4 py-4 text-base bg-white rounded-[2px] border outline-none transition-colors duration-200"
+                   style="border-color: var(--color-sand-dark); color: var(--color-ink); font-family: var(--font-heading); font-style: italic;"
+                   onfocus="this.style.borderColor='var(--color-forest)'"
+                   onblur="this.style.borderColor='var(--color-sand-dark)'" />
+
+            <div class="mt-3 flex items-center gap-2">
+              <input id="personal-date" type="text" placeholder="Optionele datum (bv. 12.07.2025)" maxlength="20"
+                     class="flex-1 px-4 py-3 text-sm bg-white rounded-[2px] border outline-none transition-colors duration-200"
+                     style="border-color: var(--color-sand-dark); color: var(--color-ink); font-family: var(--font-body);"
+                     onfocus="this.style.borderColor='var(--color-forest)'"
+                     onblur="this.style.borderColor='var(--color-sand-dark)'" />
+            </div>
+
+            <p class="text-[11px] mt-2" style="color: var(--color-muted); font-family: var(--font-body);">
+              Tip: korte teksten staan het mooist. Houd het bij namen, een datum of een woord van max. 4 woorden.
+            </p>
+          </div>
+
+          <!-- Step 4: Quantity -->
+          <div class="mb-10">
+            <div class="flex items-baseline justify-between mb-4">
+              <h2 class="text-xl" style="font-family: var(--font-heading); color: var(--color-ink); font-weight: 400;">04 · Aantal</h2>
+              <span id="discount-text" class="text-xs hidden" style="color: var(--color-amber); font-family: var(--font-body);">Bulkkorting actief</span>
+            </div>
+            <div class="grid grid-cols-4 gap-2 mb-3">
+              {[1, 10, 25, 50].map((q, idx) => (
+                <button data-qty-preset={q}
+                        class={`qty-btn py-3 rounded-[2px] border text-sm transition-all ${idx === 0 ? 'active' : ''}`}
+                        style={`border-color: ${idx === 0 ? 'var(--color-forest)' : 'var(--color-sand-dark)'}; background: ${idx === 0 ? 'var(--color-cream)' : 'var(--color-white)'}; color: var(--color-ink); font-family: var(--font-body);`}>
+                  {q === 1 ? '1 stuk' : `${q} stuks`}
+                </button>
+              ))}
+            </div>
+            <div class="flex items-center gap-3">
+              <input id="qty-custom" type="number" min="1" max="500" value="1"
+                     class="w-24 px-4 py-3 text-sm bg-white rounded-[2px] border outline-none transition-colors duration-200"
+                     style="border-color: var(--color-sand-dark); color: var(--color-ink); font-family: var(--font-body);" />
+              <span class="text-xs" style="color: var(--color-muted); font-family: var(--font-body);">of vul een eigen aantal in (max 500)</span>
+            </div>
+          </div>
+
+          <!-- Price breakdown -->
+          <div class="rounded-[2px] p-5 mb-6 space-y-2" style="background: var(--color-white); border: 1px solid var(--color-sand-dark);">
+            <div class="flex justify-between text-sm" style="color: var(--color-muted); font-family: var(--font-body);">
+              <span>Basisprijs</span>
+              <span id="base-price">€4,50</span>
+            </div>
+            <div class="flex justify-between text-sm" style="color: var(--color-muted); font-family: var(--font-body);">
+              <span>Geur toeslag</span>
+              <span id="scent-extra">€0,00</span>
+            </div>
+            <div id="bulk-row" class="flex justify-between text-sm hidden" style="color: var(--color-amber); font-family: var(--font-body);">
+              <span>Bulkkorting</span>
+              <span id="bulk-discount">−€0,00</span>
+            </div>
+            <div class="flex justify-between pt-3 border-t" style="border-color: var(--color-sand-dark);">
+              <span class="text-base font-medium" style="color: var(--color-ink); font-family: var(--font-body);">Totaal</span>
+              <span id="final-total" class="text-2xl" style="color: var(--color-forest); font-family: var(--font-heading);">€4,50</span>
+            </div>
+          </div>
+
+          <!-- Add to cart -->
+          <button id="config-add" class="btn-primary w-full justify-center text-base py-4">
+            Voeg toe aan winkelmand
+            <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor"><path d="M1 1.75A.75.75 0 011.75 1h1.628a1.75 1.75 0 011.734 1.51L5.18 3a65.25 65.25 0 0113.36 1.412.75.75 0 01.58.875 48.645 48.645 0 01-1.618 6.2.75.75 0 01-.712.513H6a2.503 2.503 0 00-2.292 1.5H17.25a.75.75 0 010 1.5H2.76a.75.75 0 01-.748-.807 4.002 4.002 0 012.716-3.486L3.626 2.716a.25.25 0 00-.248-.216H1.75A.75.75 0 011 1.75z"/></svg>
+          </button>
+
+          <p class="text-[11px] text-center mt-4" style="color: var(--color-muted); font-family: var(--font-body);">
+            Bestellingen vanaf 10 stuks: ik neem persoonlijk contact op met een proefexemplaar.
+          </p>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<script is:inline>
+(function() {
+  const state = {
+    image: '/images/personalised-soap-real.jpg',
+    shape: 'Roos',
+    scent: 'Lavendel',
+    scentExtra: 0,
+    text: '',
+    date: '',
+    qty: 1,
+    base: 4.50,
+  };
+
+  const fmt = n => '€' + n.toFixed(2).replace('.', ',');
+
+  function calcPrice() {
+    let unit = state.base + state.scentExtra;
+    let subtotal = unit * state.qty;
+    let discount = 0;
+    if (state.qty >= 50) discount = subtotal * 0.15;
+    else if (state.qty >= 25) discount = subtotal * 0.10;
+    else if (state.qty >= 10) discount = subtotal * 0.05;
+    return { unit, subtotal, discount, total: subtotal - discount };
+  }
+
+  function update() {
+    // Preview
+    document.getElementById('preview-image').src = state.image;
+    document.getElementById('preview-text').textContent = state.text || 'Jouw naam';
+    document.getElementById('preview-eyebrow').textContent = state.text ? 'Persoonlijk gemaakt voor' : 'Voorbeeldtekst';
+    const dateEl = document.getElementById('preview-date');
+    if (state.date) {
+      dateEl.textContent = state.date;
+      dateEl.style.opacity = '1';
+    } else {
+      dateEl.style.opacity = '0';
+    }
+
+    // Summary
+    document.getElementById('config-summary').textContent = `${state.scent} · ${state.shape} shape · ${state.qty} ${state.qty === 1 ? 'stuk' : 'stuks'}`;
+
+    // Price
+    const p = calcPrice();
+    document.getElementById('base-price').textContent = fmt(state.base * state.qty);
+    document.getElementById('scent-extra').textContent = fmt(state.scentExtra * state.qty);
+    document.getElementById('final-total').textContent = fmt(p.total);
+    document.getElementById('config-price').textContent = fmt(p.total);
+
+    const bulkRow = document.getElementById('bulk-row');
+    if (p.discount > 0) {
+      bulkRow.classList.remove('hidden');
+      document.getElementById('bulk-discount').textContent = '−' + fmt(p.discount);
+      document.getElementById('discount-text').classList.remove('hidden');
+    } else {
+      bulkRow.classList.add('hidden');
+      document.getElementById('discount-text').classList.add('hidden');
+    }
+
+    // Char counter
+    document.getElementById('char-counter').textContent = `${state.text.length} / 24`;
+  }
+
+  // Image options
+  document.querySelectorAll('[data-img-option]').forEach(b => {
+    b.addEventListener('click', () => {
+      state.image = b.dataset.imgOption;
+      document.querySelectorAll('.img-option').forEach(x => x.style.borderColor = 'transparent');
+      b.style.borderColor = 'var(--color-forest)';
+      update();
+    });
+  });
+
+  // Shapes
+  document.querySelectorAll('[data-shape]').forEach(b => {
+    b.addEventListener('click', () => {
+      state.shape = b.dataset.shape;
+      document.querySelectorAll('.shape-btn').forEach(x => {
+        x.style.borderColor = 'var(--color-sand-dark)';
+        x.style.background = 'var(--color-white)';
+      });
+      b.style.borderColor = 'var(--color-forest)';
+      b.style.background = 'var(--color-cream)';
+      document.getElementById('shape-label').textContent = state.shape;
+      update();
+    });
+  });
+
+  // Scents
+  document.querySelectorAll('[data-scent]').forEach(b => {
+    b.addEventListener('click', () => {
+      state.scent = b.dataset.scent;
+      state.scentExtra = parseFloat(b.dataset.scentExtra) || 0;
+      document.querySelectorAll('.scent-btn').forEach(x => {
+        x.style.borderColor = 'var(--color-sand-dark)';
+        x.style.background = 'var(--color-white)';
+      });
+      b.style.borderColor = 'var(--color-forest)';
+      b.style.background = 'var(--color-cream)';
+      document.getElementById('scent-label').textContent = state.scent;
+      update();
+    });
+  });
+
+  // Text
+  document.getElementById('personal-text').addEventListener('input', e => {
+    state.text = e.target.value;
+    update();
+  });
+  document.getElementById('personal-date').addEventListener('input', e => {
+    state.date = e.target.value;
+    update();
+  });
+
+  // Quantity presets
+  document.querySelectorAll('[data-qty-preset]').forEach(b => {
+    b.addEventListener('click', () => {
+      state.qty = parseInt(b.dataset.qtyPreset);
+      document.getElementById('qty-custom').value = state.qty;
+      document.querySelectorAll('.qty-btn').forEach(x => {
+        x.style.borderColor = 'var(--color-sand-dark)';
+        x.style.background = 'var(--color-white)';
+      });
+      b.style.borderColor = 'var(--color-forest)';
+      b.style.background = 'var(--color-cream)';
+      update();
+    });
+  });
+
+  document.getElementById('qty-custom').addEventListener('input', e => {
+    const v = Math.max(1, Math.min(500, parseInt(e.target.value) || 1));
+    state.qty = v;
+    document.querySelectorAll('.qty-btn').forEach(x => {
+      x.style.borderColor = 'var(--color-sand-dark)';
+      x.style.background = 'var(--color-white)';
+    });
+    update();
+  });
+
+  // Add to cart
+  document.getElementById('config-add').addEventListener('click', () => {
+    const p = calcPrice();
+    const product = {
+      slug: 'gepersonaliseerde-zeep-' + Date.now(),
+      name: `Zeep "${state.text || 'Op maat'}" · ${state.shape}`,
+      price: p.total / state.qty,
+      image: state.image,
+    };
+    window.NBRCart?.add(product, state.qty, {
+      text: state.text,
+      date: state.date,
+      shape: state.shape,
+      scent: state.scent,
+    });
+  });
+
+  update();
+})();
+</script>

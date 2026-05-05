@@ -1,0 +1,83 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CTASection from '../components/CTASection.astro';
+---
+
+<Layout title="Contact — Natural ByRoos">
+  <main class="pt-20">
+
+    <!-- Hero -->
+    <section class="py-16 lg:py-20" style="background: var(--color-cream);">
+      <div class="max-w-[1440px] mx-auto px-6 lg:px-12">
+        <div class="grid lg:grid-cols-12 gap-8 items-end">
+          <div class="lg:col-span-6">
+            <div class="flex items-center gap-3 mb-6">
+              <span class="block w-10 h-px" style="background: var(--color-sage);"></span>
+              <span class="section-label">Contact</span>
+            </div>
+            <h1 class="text-[clamp(2.5rem,6vw,5rem)] leading-[1.05] mb-6" style="font-family: var(--font-heading); color: var(--color-ink); font-weight: 300;">
+              Laat van<br/><em style="color: var(--color-forest);">je horen.</em>
+            </h1>
+          </div>
+          <div class="lg:col-span-5 lg:col-start-8">
+            <div class="grid sm:grid-cols-2 gap-4">
+              <a href="mailto:info@naturalbyroos.nl" class="block p-5 rounded-[2px] transition-all hover:-translate-y-0.5"
+                 style="background: var(--color-white); border: 1px solid var(--color-sand-dark);">
+                <p class="text-[10px] uppercase tracking-[0.18em] mb-2" style="color: var(--color-sage); font-family: var(--font-body);">E-mail</p>
+                <p class="text-sm" style="color: var(--color-ink); font-family: var(--font-body); font-weight: 500;">info@naturalbyroos.nl</p>
+                <p class="text-[11px] mt-1" style="color: var(--color-muted); font-family: var(--font-body);">Reactie binnen 24 uur</p>
+              </a>
+              <a href="tel:+31630257617" class="block p-5 rounded-[2px] transition-all hover:-translate-y-0.5"
+                 style="background: var(--color-white); border: 1px solid var(--color-sand-dark);">
+                <p class="text-[10px] uppercase tracking-[0.18em] mb-2" style="color: var(--color-sage); font-family: var(--font-body);">Telefoon</p>
+                <p class="text-sm" style="color: var(--color-ink); font-family: var(--font-body); font-weight: 500;">06-30 25 76 17</p>
+                <p class="text-[11px] mt-1" style="color: var(--color-muted); font-family: var(--font-body);">Maandag — vrijdag</p>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Locations + form -->
+    <CTASection />
+
+    <!-- Address & info -->
+    <section class="py-20 lg:py-28" style="background: var(--color-white);">
+      <div class="max-w-[1440px] mx-auto px-6 lg:px-12">
+        <div class="grid md:grid-cols-3 gap-px" style="background: var(--color-sand-dark);">
+          <div class="p-8 lg:p-10" style="background: var(--color-cream);">
+            <span class="text-[10px] uppercase tracking-[0.18em] block mb-3" style="color: var(--color-sage); font-family: var(--font-body);">Bezoek</span>
+            <h3 class="text-2xl mb-4" style="font-family: var(--font-heading); color: var(--color-ink); font-weight: 400;">Atelier Grijpskerke</h3>
+            <p class="text-sm leading-relaxed mb-3" style="color: var(--color-ink-soft); font-family: var(--font-body);">
+              Bergwei 10<br/>
+              4364 AZ Grijpskerke<br/>
+              Zeeland
+            </p>
+            <p class="text-[11px]" style="color: var(--color-muted); font-family: var(--font-body);">Op afspraak — bel of mail eerst</p>
+          </div>
+          <div class="p-8 lg:p-10" style="background: var(--color-cream);">
+            <span class="text-[10px] uppercase tracking-[0.18em] block mb-3" style="color: var(--color-sage); font-family: var(--font-body);">Bedrijf</span>
+            <h3 class="text-2xl mb-4" style="font-family: var(--font-heading); color: var(--color-ink); font-weight: 400;">Natural ByRoos</h3>
+            <p class="text-sm leading-relaxed mb-3" style="color: var(--color-ink-soft); font-family: var(--font-body);">
+              KvK 81623259<br/>
+              Sinds 2021<br/>
+              Vrijgesteld middels KOR
+            </p>
+            <p class="text-[11px]" style="color: var(--color-muted); font-family: var(--font-body);">9.9/10 op WebwinkelKeur (28 reviews)</p>
+          </div>
+          <div class="p-8 lg:p-10" style="background: var(--color-cream);">
+            <span class="text-[10px] uppercase tracking-[0.18em] block mb-3" style="color: var(--color-sage); font-family: var(--font-body);">Afhalen</span>
+            <h3 class="text-2xl mb-4" style="font-family: var(--font-heading); color: var(--color-ink); font-weight: 400;">Drie locaties</h3>
+            <ul class="text-sm leading-relaxed space-y-1.5" style="color: var(--color-ink-soft); font-family: var(--font-body);">
+              <li>· Grijpskerke <span style="color: var(--color-muted);">(atelier)</span></li>
+              <li>· Kloetinge <span style="color: var(--color-muted);">(Zoutgrot Zeeland)</span></li>
+              <li>· Burgh-Haamstede</li>
+            </ul>
+            <p class="text-[11px] mt-4" style="color: var(--color-muted); font-family: var(--font-body);">Geen verzendkosten bij afhalen</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>

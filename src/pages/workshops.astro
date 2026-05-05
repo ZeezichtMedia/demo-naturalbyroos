@@ -1,0 +1,233 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const workshops = [
+  {
+    slug: 'zeep-maken',
+    title: 'Workshop Zeep Maken',
+    subtitle: 'In 2,5 uur creatief ontspannen',
+    duration: '2,5 uur',
+    price: 35,
+    pricePromo: 25,
+    location: 'Grijpskerke',
+    capacity: 'Max. 4 personen',
+    image: '/images/personalised-soap-real.jpg',
+    description: 'Maak je eigen zeep onder begeleiding. Je kiest geur, kleur en vorm — en gaat na 2,5 uur naar huis met meerdere zelfgemaakte zepen.',
+    includes: ['Alle materialen & ingrediënten', 'Begeleiding van Roos', 'Koffie/thee met iets lekkers', '2 zelfgemaakte zepen om mee naar huis te nemen'],
+    badge: 'Bestseller',
+  },
+  {
+    slug: 'kruidenvoetbad',
+    title: 'Kruidenvoetbad',
+    subtitle: 'Maak je eigen natuurlijk kruidenmiddel',
+    duration: '2 uur',
+    price: 30,
+    pricePromo: 25,
+    location: 'Kloetinge · Zoutgrot Zeeland',
+    capacity: 'Max. 4 personen',
+    image: '/images/workshop.jpg',
+    description: 'Stel je eigen kruidenmix samen met gedroogde kruiden, natuurlijke zouten en klei. Eindigend met een warm voetenbad in de zoutgrot.',
+    includes: ['Eigen kruidenmix', 'Warm voetenbad', 'Zoutgrot ervaring', 'Thee en stilte'],
+    badge: 'Wellness',
+  },
+];
+
+const dates = [
+  { date: '2025-05-08', day: 'Donderdag 8 mei', time: '19:30 — 22:00', workshop: 'Zeep Maken', location: 'Grijpskerke', spots: 2 },
+  { date: '2025-05-10', day: 'Zaterdag 10 mei', time: '14:00 — 16:30', workshop: 'Zeep Maken', location: 'Grijpskerke', spots: 1 },
+  { date: '2025-05-15', day: 'Donderdag 15 mei', time: '19:30 — 21:30', workshop: 'Kruidenvoetbad', location: 'Kloetinge', spots: 4 },
+  { date: '2025-07-03', day: 'Donderdag 3 juli', time: '19:30 — 22:00', workshop: 'Zeep Maken', location: 'Grijpskerke', spots: 4 },
+  { date: '2025-07-12', day: 'Zaterdag 12 juli', time: '14:00 — 16:30', workshop: 'Kruidenvoetbad', location: 'Kloetinge', spots: 3 },
+  { date: '2025-07-19', day: 'Zaterdag 19 juli', time: '14:00 — 16:30', workshop: 'Zeep Maken', location: 'Grijpskerke', spots: 4 },
+];
+---
+
+<Layout title="Workshops — Natural ByRoos">
+  <main class="pt-24">
+
+    <!-- Hero -->
+    <section class="py-16 lg:py-24" style="background: var(--color-cream);">
+      <div class="max-w-[1440px] mx-auto px-6 lg:px-12">
+        <div class="max-w-3xl">
+          <div class="flex items-center gap-3 mb-6">
+            <span class="block w-10 h-px" style="background: var(--color-sage);"></span>
+            <span class="section-label">Workshops · Mei – Juli 2025</span>
+          </div>
+          <h1 class="text-[clamp(2.5rem,6vw,5rem)] leading-[1.05] mb-6" style="font-family: var(--font-heading); color: var(--color-ink); font-weight: 300;">
+            Creatief ontspannen<br/><em style="color: var(--color-forest);">in Zeeland.</em>
+          </h1>
+          <p class="text-base lg:text-lg leading-[1.7]" style="color: var(--color-ink-soft); font-family: var(--font-body); font-weight: 300;">
+            Een paar uurtjes uit de hectiek, samen met maximaal vier mensen. Je gaat naar huis met iets dat je zelf gemaakt hebt — en meestal ook met een rustiger hoofd.
+          </p>
+        </div>
+
+        <!-- Promo banner -->
+        <div class="mt-12 rounded-[2px] p-6 flex flex-col sm:flex-row items-start sm:items-center gap-6 justify-between" style="background: var(--color-forest);">
+          <div class="text-white">
+            <span class="text-[10px] uppercase tracking-[0.2em]" style="color: var(--color-amber-light); font-family: var(--font-body);">Tijdelijke actie</span>
+            <p class="text-xl lg:text-2xl mt-1" style="font-family: var(--font-heading); font-weight: 400;">€50 voor 2 personen — tot 10 mei</p>
+          </div>
+          <a href="#agenda" class="btn-primary flex-shrink-0" style="background: var(--color-amber);">Bekijk agenda</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Workshop types -->
+    <section class="py-20 lg:py-28" style="background: var(--color-white);">
+      <div class="max-w-[1440px] mx-auto px-6 lg:px-12">
+        <div class="grid lg:grid-cols-2 gap-8">
+          {workshops.map(ws => (
+            <article class="rounded-[2px] overflow-hidden group" style="background: var(--color-cream);">
+              <div class="relative aspect-[16/10] overflow-hidden">
+                <img src={ws.image} alt={ws.title} class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                <span class="absolute top-4 left-4 text-[10px] uppercase tracking-[0.18em] px-3 py-1.5 rounded-[2px]"
+                      style="background: var(--color-white); color: var(--color-ink); font-family: var(--font-body);">{ws.badge}</span>
+              </div>
+
+              <div class="p-8 lg:p-10">
+                <span class="text-[10px] uppercase tracking-[0.18em] block mb-2" style="color: var(--color-sage); font-family: var(--font-body);">{ws.subtitle}</span>
+                <h3 class="text-3xl lg:text-4xl mb-5" style="font-family: var(--font-heading); color: var(--color-ink); font-weight: 400;">{ws.title}</h3>
+                <p class="text-sm leading-[1.7] mb-6" style="color: var(--color-ink-soft); font-family: var(--font-body); font-weight: 300;">{ws.description}</p>
+
+                <div class="grid grid-cols-3 gap-3 mb-6 pb-6 border-b" style="border-color: var(--color-sand-dark);">
+                  <div>
+                    <p class="text-[10px] uppercase tracking-[0.15em] mb-1" style="color: var(--color-muted); font-family: var(--font-body);">Duur</p>
+                    <p class="text-sm" style="color: var(--color-ink); font-family: var(--font-body);">{ws.duration}</p>
+                  </div>
+                  <div>
+                    <p class="text-[10px] uppercase tracking-[0.15em] mb-1" style="color: var(--color-muted); font-family: var(--font-body);">Plek</p>
+                    <p class="text-sm" style="color: var(--color-ink); font-family: var(--font-body);">{ws.location.split('·')[0].trim()}</p>
+                  </div>
+                  <div>
+                    <p class="text-[10px] uppercase tracking-[0.15em] mb-1" style="color: var(--color-muted); font-family: var(--font-body);">Groep</p>
+                    <p class="text-sm" style="color: var(--color-ink); font-family: var(--font-body);">{ws.capacity}</p>
+                  </div>
+                </div>
+
+                <ul class="space-y-2 mb-6">
+                  {ws.includes.map(inc => (
+                    <li class="flex items-start gap-2 text-sm" style="color: var(--color-ink-soft); font-family: var(--font-body);">
+                      <svg class="w-3.5 h-3.5 flex-shrink-0 mt-0.5" style="color: var(--color-sage);" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd"/></svg>
+                      {inc}
+                    </li>
+                  ))}
+                </ul>
+
+                <div class="flex items-center justify-between">
+                  <div>
+                    <span class="text-3xl" style="color: var(--color-forest); font-family: var(--font-heading); font-weight: 400;">€{ws.price}</span>
+                    <span class="text-xs ml-1" style="color: var(--color-muted); font-family: var(--font-body);">p.p.</span>
+                  </div>
+                  <a href="#agenda" class="btn-primary text-xs py-2.5 px-5">Datum kiezen</a>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Agenda -->
+    <section id="agenda" class="py-20 lg:py-28" style="background: var(--color-cream);">
+      <div class="max-w-[1440px] mx-auto px-6 lg:px-12">
+        <div class="flex items-end justify-between mb-12">
+          <div>
+            <span class="section-label block mb-3">Agenda</span>
+            <h2 class="text-3xl lg:text-5xl" style="font-family: var(--font-heading); color: var(--color-ink); font-weight: 300;">
+              Beschikbare data
+            </h2>
+          </div>
+          <p class="hidden sm:block text-xs" style="color: var(--color-muted); font-family: var(--font-body);">Juni gesloten · update wekelijks</p>
+        </div>
+
+        <div class="rounded-[2px] overflow-hidden" style="background: var(--color-white);">
+          {dates.map((d, idx) => (
+            <div class={`flex flex-col sm:flex-row sm:items-center gap-4 p-5 lg:p-6 ${idx > 0 ? 'border-t' : ''}`} style="border-color: var(--color-sand);">
+              <div class="sm:w-48">
+                <p class="text-[10px] uppercase tracking-[0.18em] mb-1" style="color: var(--color-sage); font-family: var(--font-body);">{new Date(d.date).toLocaleDateString('nl-NL', { month: 'long' })}</p>
+                <p class="text-base font-medium" style="color: var(--color-ink); font-family: var(--font-body);">{d.day}</p>
+                <p class="text-xs" style="color: var(--color-muted); font-family: var(--font-body);">{d.time}</p>
+              </div>
+              <div class="sm:w-48">
+                <p class="text-base" style="font-family: var(--font-heading); color: var(--color-ink);">{d.workshop}</p>
+                <p class="text-xs" style="color: var(--color-muted); font-family: var(--font-body);">{d.location}</p>
+              </div>
+              <div class="sm:flex-1">
+                <div class="flex items-center gap-2">
+                  <div class="flex gap-1">
+                    {Array.from({ length: 4 }).map((_, i) => (
+                      <span class="w-2.5 h-2.5 rounded-full" style={`background: ${i < d.spots ? 'var(--color-sage)' : 'var(--color-sand-dark)'};`}></span>
+                    ))}
+                  </div>
+                  <span class={`text-[11px] uppercase tracking-[0.1em] ${d.spots <= 1 ? 'font-medium' : ''}`}
+                        style={`color: ${d.spots <= 1 ? 'var(--color-amber)' : 'var(--color-muted)'}; font-family: var(--font-body);`}>
+                    {d.spots === 0 ? 'Volgeboekt' : `${d.spots} ${d.spots === 1 ? 'plek' : 'plekken'} vrij`}
+                  </span>
+                </div>
+              </div>
+              <button data-book={d.day} class={`book-btn text-xs uppercase tracking-[0.15em] py-2.5 px-5 rounded-full ${d.spots === 0 ? 'opacity-40 cursor-not-allowed' : ''}`}
+                      style={`background: ${d.spots === 0 ? 'var(--color-sand)' : 'var(--color-forest)'}; color: ${d.spots === 0 ? 'var(--color-muted)' : 'white'}; font-family: var(--font-body); font-weight: 500;`}
+                      disabled={d.spots === 0}>
+                {d.spots === 0 ? 'Vol' : 'Boeken'}
+              </button>
+            </div>
+          ))}
+        </div>
+
+        <p class="text-xs text-center mt-8" style="color: var(--color-muted); font-family: var(--font-body);">
+          Geen geschikte datum? <a href="/contact" class="underline" style="color: var(--color-forest);">Stuur een bericht</a> — voor groepen plan ik graag een eigen datum.
+        </p>
+      </div>
+    </section>
+
+    <!-- Booking modal -->
+    <div id="booking-modal" class="fixed inset-0 z-[80] opacity-0 invisible flex items-center justify-center p-6 transition-all duration-300"
+         style="background: rgba(28,28,28,0.6); backdrop-filter: blur(8px);">
+      <div class="rounded-[2px] max-w-md w-full p-8 lg:p-10 relative" style="background: var(--color-white);">
+        <button id="modal-close" class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full" style="color: var(--color-ink);">
+          <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+        </button>
+        <span class="section-label block mb-3">Reservering</span>
+        <h3 class="text-3xl mb-2" style="font-family: var(--font-heading); color: var(--color-ink); font-weight: 400;">Plek reserveren</h3>
+        <p id="modal-date" class="text-sm mb-6" style="color: var(--color-muted); font-family: var(--font-body);"></p>
+
+        <form class="space-y-4" onsubmit="event.preventDefault(); document.getElementById('booking-success').classList.remove('hidden'); this.style.display='none';">
+          <input type="text" placeholder="Naam" required class="w-full px-0 py-3 text-base bg-transparent border-0 border-b outline-none" style="border-color: var(--color-sand-dark); color: var(--color-ink); font-family: var(--font-body);" />
+          <input type="email" placeholder="E-mail" required class="w-full px-0 py-3 text-base bg-transparent border-0 border-b outline-none" style="border-color: var(--color-sand-dark); color: var(--color-ink); font-family: var(--font-body);" />
+          <input type="tel" placeholder="Telefoon" class="w-full px-0 py-3 text-base bg-transparent border-0 border-b outline-none" style="border-color: var(--color-sand-dark); color: var(--color-ink); font-family: var(--font-body);" />
+          <select class="w-full px-0 py-3 text-base bg-transparent border-0 border-b outline-none" style="border-color: var(--color-sand-dark); color: var(--color-ink); font-family: var(--font-body);">
+            <option>1 persoon</option><option selected>2 personen</option><option>3 personen</option><option>4 personen</option>
+          </select>
+          <button type="submit" class="btn-primary w-full justify-center mt-6">Bevestig reservering</button>
+        </form>
+
+        <div id="booking-success" class="hidden text-center py-8">
+          <div class="w-14 h-14 mx-auto mb-4 rounded-full flex items-center justify-center" style="background: var(--color-sage-light);">
+            <svg class="w-6 h-6" style="color: var(--color-forest);" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd"/></svg>
+          </div>
+          <h3 class="text-2xl mb-2" style="font-family: var(--font-heading); color: var(--color-ink);">Bedankt!</h3>
+          <p class="text-sm" style="color: var(--color-muted); font-family: var(--font-body);">Ik neem binnen 24 uur contact op om de reservering te bevestigen.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<script is:inline>
+  document.querySelectorAll('[data-book]').forEach(b => {
+    if (b.disabled) return;
+    b.addEventListener('click', () => {
+      document.getElementById('modal-date').textContent = b.dataset.book;
+      const m = document.getElementById('booking-modal');
+      m.style.opacity = '1';
+      m.style.visibility = 'visible';
+      document.body.style.overflow = 'hidden';
+    });
+  });
+  document.getElementById('modal-close').addEventListener('click', () => {
+    const m = document.getElementById('booking-modal');
+    m.style.opacity = '0';
+    m.style.visibility = 'hidden';
+    document.body.style.overflow = '';
+  });
+</script>

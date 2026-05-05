@@ -1,0 +1,148 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ProductCard from '../components/ProductCard.astro';
+import { products, categories, brands } from '../data/products';
+---
+
+<Layout title="Shop — Natural ByRoos">
+  <main class="pt-24">
+    <!-- Page header -->
+    <section class="py-16 lg:py-24" style="background: var(--color-cream);">
+      <div class="max-w-[1440px] mx-auto px-6 lg:px-12">
+        <div class="grid lg:grid-cols-12 gap-8 items-end">
+          <div class="lg:col-span-7">
+            <div class="flex items-center gap-3 mb-6">
+              <span class="block w-10 h-px" style="background: var(--color-sage);"></span>
+              <span class="section-label">Shop · Alle producten</span>
+            </div>
+            <h1 class="text-[clamp(2.5rem,6vw,5rem)] leading-[1.05]"
+                style="font-family: var(--font-heading); color: var(--color-ink); font-weight: 300;">
+              Duurzame favorieten,<br/><em style="color: var(--color-forest);">zorgvuldig samengesteld.</em>
+            </h1>
+          </div>
+          <div class="lg:col-span-4 lg:col-start-9">
+            <p class="text-base leading-relaxed" style="color: var(--color-ink-soft); font-family: var(--font-body); font-weight: 300;">
+              {products.length} producten van merken die we zelf gebruiken en aanbevelen. Vegan, plastic-vrij waar mogelijk, met aandacht gemaakt.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Filters bar -->
+    <section class="sticky top-20 z-30 border-y" style="background: var(--color-white); border-color: var(--color-sand-dark);">
+      <div class="max-w-[1440px] mx-auto px-6 lg:px-12">
+        <div class="flex items-center justify-between py-4 gap-4 overflow-x-auto">
+          <div class="flex items-center gap-2 flex-shrink-0">
+            {categories.map(cat => (
+              <button data-filter-cat={cat.slug}
+                      class="filter-chip text-[12px] uppercase tracking-[0.12em] px-4 py-2 rounded-full font-medium border transition-all whitespace-nowrap"
+                      style={`color: var(--color-ink-soft); border-color: var(--color-sand-dark); font-family: var(--font-body);`}>
+                {cat.label}
+              </button>
+            ))}
+          </div>
+          <div class="flex items-center gap-3 flex-shrink-0">
+            <span class="hidden sm:block text-[11px] uppercase tracking-[0.12em]" style="color: var(--color-muted); font-family: var(--font-body);">Sorteer op</span>
+            <select id="sort-select" class="text-[12px] py-2 px-3 rounded-full border outline-none cursor-pointer"
+                    style="border-color: var(--color-sand-dark); background: var(--color-white); color: var(--color-ink); font-family: var(--font-body);">
+              <option value="default">Aanbevolen</option>
+              <option value="price-asc">Prijs: laag → hoog</option>
+              <option value="price-desc">Prijs: hoog → laag</option>
+              <option value="name">Naam</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Products grid -->
+    <section class="py-16 lg:py-24" style="background: var(--color-cream);">
+      <div class="max-w-[1440px] mx-auto px-6 lg:px-12">
+        <div id="product-grid" class="grid grid-cols-2 lg:grid-cols-4 gap-x-5 gap-y-12">
+          {products.map(product => (
+            <div class="product-item" data-cat={product.category.toLowerCase()} data-price={product.price} data-name={product.name}>
+              <ProductCard product={product} />
+            </div>
+          ))}
+        </div>
+
+        <div id="empty-state" class="hidden text-center py-20">
+          <p class="text-lg mb-2" style="font-family: var(--font-heading); color: var(--color-ink);">Geen producten gevonden</p>
+          <p class="text-sm" style="color: var(--color-muted); font-family: var(--font-body);">Probeer een andere categorie</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Brand strip -->
+    <section class="py-16 border-t" style="background: var(--color-white); border-color: var(--color-sand);">
+      <div class="max-w-[1440px] mx-auto px-6 lg:px-12 text-center">
+        <p class="text-[10px] uppercase tracking-[0.18em] mb-6" style="color: var(--color-muted); font-family: var(--font-body);">Merken die wij voeren</p>
+        <div class="flex flex-wrap items-center justify-center gap-x-12 gap-y-4">
+          {brands.map(brand => (
+            <span class="text-lg lg:text-xl italic" style="color: var(--color-ink-soft); font-family: var(--font-heading); font-weight: 300;">
+              {brand}
+            </span>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<script is:inline>
+  // Filter & sort
+  let activeCat = 'alle';
+  const url = new URL(window.location.href);
+  const initialCat = url.searchParams.get('cat');
+  if (initialCat) activeCat = initialCat;
+
+  function applyFilter() {
+    const items = document.querySelectorAll('.product-item');
+    let visible = 0;
+    items.forEach(item => {
+      const cat = item.dataset.cat;
+      const show = activeCat === 'alle' || cat === activeCat;
+      item.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+    document.getElementById('empty-state').classList.toggle('hidden', visible > 0);
+    document.getElementById('product-grid').classList.toggle('hidden', visible === 0);
+
+    document.querySelectorAll('[data-filter-cat]').forEach(b => {
+      const active = b.dataset.filterCat === activeCat;
+      b.style.background = active ? 'var(--color-forest)' : 'var(--color-white)';
+      b.style.color = active ? 'white' : 'var(--color-ink-soft)';
+      b.style.borderColor = active ? 'var(--color-forest)' : 'var(--color-sand-dark)';
+    });
+  }
+
+  function applySort(mode) {
+    const grid = document.getElementById('product-grid');
+    const items = Array.from(grid.querySelectorAll('.product-item'));
+    items.sort((a, b) => {
+      if (mode === 'price-asc') return parseFloat(a.dataset.price) - parseFloat(b.dataset.price);
+      if (mode === 'price-desc') return parseFloat(b.dataset.price) - parseFloat(a.dataset.price);
+      if (mode === 'name') return a.dataset.name.localeCompare(b.dataset.name);
+      return 0;
+    });
+    items.forEach(item => grid.appendChild(item));
+  }
+
+  document.querySelectorAll('[data-filter-cat]').forEach(b => {
+    b.addEventListener('click', () => {
+      activeCat = b.dataset.filterCat;
+      applyFilter();
+      const u = new URL(window.location.href);
+      if (activeCat === 'alle') u.searchParams.delete('cat');
+      else u.searchParams.set('cat', activeCat);
+      history.replaceState({}, '', u);
+    });
+  });
+
+  document.getElementById('sort-select').addEventListener('change', e => {
+    applySort(e.target.value);
+  });
+
+  applyFilter();
+</script>

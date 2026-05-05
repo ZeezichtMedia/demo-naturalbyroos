@@ -1,0 +1,181 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Winkelmand — Natural ByRoos">
+  <main class="pt-24" style="background: var(--color-cream); min-height: 100vh;">
+    <div class="max-w-[1440px] mx-auto px-6 lg:px-12 py-12 lg:py-20">
+
+      <!-- Header -->
+      <div class="mb-12">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="block w-10 h-px" style="background: var(--color-sage);"></span>
+          <span class="section-label">Winkelmand</span>
+        </div>
+        <h1 class="text-[clamp(2.5rem,5vw,4.5rem)] leading-[1.05]" style="font-family: var(--font-heading); color: var(--color-ink); font-weight: 300;">
+          Jouw selectie
+        </h1>
+      </div>
+
+      <div id="cart-page-content" class="grid lg:grid-cols-12 gap-12">
+
+        <!-- Empty state -->
+        <div id="cart-page-empty" class="lg:col-span-12 text-center py-20">
+          <div class="w-20 h-20 mx-auto mb-6 rounded-full flex items-center justify-center" style="background: var(--color-white);">
+            <svg class="w-9 h-9" style="color: var(--color-sage);" viewBox="0 0 20 20" fill="currentColor"><path d="M1 1.75A.75.75 0 011.75 1h1.628a1.75 1.75 0 011.734 1.51L5.18 3a65.25 65.25 0 0113.36 1.412.75.75 0 01.58.875 48.645 48.645 0 01-1.618 6.2.75.75 0 01-.712.513H6a2.503 2.503 0 00-2.292 1.5H17.25a.75.75 0 010 1.5H2.76a.75.75 0 01-.748-.807 4.002 4.002 0 012.716-3.486L3.626 2.716a.25.25 0 00-.248-.216H1.75A.75.75 0 011 1.75zM6 17.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zm10 0a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"/></svg>
+          </div>
+          <h2 class="text-3xl mb-3" style="font-family: var(--font-heading); color: var(--color-ink); font-weight: 400;">Je mandje is nog leeg</h2>
+          <p class="text-base max-w-md mx-auto mb-8" style="color: var(--color-muted); font-family: var(--font-body);">
+            Ontdek onze handgemaakte zeep, badzout en verzorging — duurzaam en op maat.
+          </p>
+          <a href="/shop" class="btn-primary">Naar de shop</a>
+        </div>
+
+        <!-- Items column -->
+        <div id="cart-page-items" class="lg:col-span-8 hidden"></div>
+
+        <!-- Summary column -->
+        <aside id="cart-page-summary" class="lg:col-span-4 hidden">
+          <div class="rounded-[2px] p-7 sticky top-32" style="background: var(--color-white);">
+            <h2 class="text-2xl mb-6" style="font-family: var(--font-heading); color: var(--color-ink); font-weight: 400;">Samenvatting</h2>
+
+            <!-- Free shipping bar -->
+            <div class="mb-6 space-y-2">
+              <div class="flex items-center justify-between text-[11px] uppercase tracking-[0.1em]" style="color: var(--color-muted); font-family: var(--font-body);">
+                <span id="page-shipping-text">Gratis verzending vanaf €35</span>
+                <span id="page-shipping-pct">0%</span>
+              </div>
+              <div class="h-1 rounded-full overflow-hidden" style="background: var(--color-sand);">
+                <div id="page-shipping-progress" class="h-full transition-all duration-500" style="background: var(--color-sage); width: 0%;"></div>
+              </div>
+            </div>
+
+            <div class="space-y-2 mb-6 pb-6 border-b" style="border-color: var(--color-sand-dark);">
+              <div class="flex justify-between text-sm" style="font-family: var(--font-body);">
+                <span style="color: var(--color-muted);">Subtotaal</span>
+                <span id="page-subtotal" style="color: var(--color-ink);">€0,00</span>
+              </div>
+              <div class="flex justify-between text-sm" style="font-family: var(--font-body);">
+                <span style="color: var(--color-muted);">Verzending</span>
+                <span id="page-shipping" style="color: var(--color-ink);">€4,95</span>
+              </div>
+            </div>
+
+            <div class="flex justify-between items-baseline mb-6">
+              <span class="text-lg font-medium" style="color: var(--color-ink); font-family: var(--font-body);">Totaal</span>
+              <span id="page-total" class="text-3xl" style="color: var(--color-forest); font-family: var(--font-heading); font-weight: 400;">€0,00</span>
+            </div>
+
+            <a href="/checkout" class="btn-primary w-full justify-center text-sm py-4 mb-3">
+              Naar de checkout
+              <svg class="w-3.5 h-3.5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clip-rule="evenodd"/></svg>
+            </a>
+
+            <a href="/shop" class="block text-center text-[11px] uppercase tracking-[0.15em] underline" style="color: var(--color-muted); font-family: var(--font-body);">Verder shoppen</a>
+
+            <!-- Trust badges -->
+            <div class="mt-8 pt-6 border-t space-y-3" style="border-color: var(--color-sand-dark);">
+              {[
+                { icon: '✓', text: 'Vegan & duurzaam geproduceerd' },
+                { icon: '✓', text: '9.9/10 op basis van 28 reviews' },
+                { icon: '✓', text: 'Persoonlijk contact, altijd' },
+              ].map(item => (
+                <div class="flex items-center gap-2 text-xs" style="color: var(--color-ink-soft); font-family: var(--font-body);">
+                  <span style="color: var(--color-sage);">{item.icon}</span>
+                  {item.text}
+                </div>
+              ))}
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<script is:inline>
+(function() {
+  const FREE_SHIPPING = 35;
+  const SHIPPING_COST = 4.95;
+  const fmt = n => '€' + n.toFixed(2).replace('.', ',');
+
+  function render() {
+    const cart = window.NBRCart?.get() || [];
+    const empty = document.getElementById('cart-page-empty');
+    const items = document.getElementById('cart-page-items');
+    const summary = document.getElementById('cart-page-summary');
+
+    if (cart.length === 0) {
+      empty.classList.remove('hidden');
+      items.classList.add('hidden');
+      summary.classList.add('hidden');
+      return;
+    }
+    empty.classList.add('hidden');
+    items.classList.remove('hidden');
+    summary.classList.remove('hidden');
+
+    items.innerHTML = '';
+    cart.forEach(item => {
+      const row = document.createElement('div');
+      row.className = 'rounded-[2px] p-5 mb-3 flex gap-5';
+      row.style.background = 'var(--color-white)';
+      row.innerHTML = `
+        <div class="w-24 h-24 lg:w-32 lg:h-32 rounded-[2px] overflow-hidden flex-shrink-0" style="background: var(--color-sand);">
+          <img src="${item.image}" class="w-full h-full object-cover" />
+        </div>
+        <div class="flex-1 min-w-0 flex flex-col justify-between">
+          <div>
+            <h3 class="text-lg leading-snug" style="font-family: var(--font-heading); color: var(--color-ink); font-weight: 400;">${item.name}</h3>
+            ${item.customisation ? `<p class="text-[11px] mt-1 italic" style="color: var(--color-sage); font-family: var(--font-body);">"${item.customisation.text || ''}"${item.customisation.scent ? ` · ${item.customisation.scent}` : ''}${item.customisation.shape ? ` · ${item.customisation.shape}` : ''}</p>` : ''}
+            <p class="text-xs mt-2" style="color: var(--color-muted); font-family: var(--font-body);">${fmt(item.price)} per stuk</p>
+          </div>
+          <div class="flex items-center justify-between mt-3">
+            <div class="flex items-center border rounded-full" style="border-color: var(--color-sand-dark);">
+              <button data-decr="${item.key}" class="w-9 h-9 flex items-center justify-center" style="color: var(--color-ink-soft);">−</button>
+              <span class="w-8 text-center text-sm" style="font-family: var(--font-body); color: var(--color-ink);">${item.qty}</span>
+              <button data-incr="${item.key}" class="w-9 h-9 flex items-center justify-center" style="color: var(--color-ink-soft);">+</button>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="text-lg" style="color: var(--color-forest); font-family: var(--font-heading); font-weight: 500;">${fmt(item.price * item.qty)}</span>
+              <button data-remove="${item.key}" class="w-7 h-7 flex items-center justify-center opacity-50 hover:opacity-100" aria-label="Verwijderen">
+                <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor" style="color: var(--color-ink);"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+      items.appendChild(row);
+    });
+
+    items.querySelectorAll('[data-incr]').forEach(b => b.addEventListener('click', e => {
+      const key = e.currentTarget.dataset.incr;
+      const it = window.NBRCart.get().find(i => i.key === key);
+      if (it) window.NBRCart.updateQty(key, it.qty + 1);
+    }));
+    items.querySelectorAll('[data-decr]').forEach(b => b.addEventListener('click', e => {
+      const key = e.currentTarget.dataset.decr;
+      const it = window.NBRCart.get().find(i => i.key === key);
+      if (it) window.NBRCart.updateQty(key, it.qty - 1);
+    }));
+    items.querySelectorAll('[data-remove]').forEach(b => b.addEventListener('click', e => {
+      window.NBRCart.remove(e.currentTarget.dataset.remove);
+    }));
+
+    const subtotal = window.NBRCart.subtotal();
+    const shipping = subtotal >= FREE_SHIPPING ? 0 : SHIPPING_COST;
+    document.getElementById('page-subtotal').textContent = fmt(subtotal);
+    document.getElementById('page-shipping').textContent = shipping === 0 ? 'Gratis' : fmt(shipping);
+    document.getElementById('page-total').textContent = fmt(subtotal + shipping);
+
+    const remaining = Math.max(0, FREE_SHIPPING - subtotal);
+    const pct = Math.min(100, (subtotal / FREE_SHIPPING) * 100);
+    document.getElementById('page-shipping-progress').style.width = pct + '%';
+    document.getElementById('page-shipping-pct').textContent = Math.round(pct) + '%';
+    document.getElementById('page-shipping-text').textContent = remaining > 0 ? `Nog ${fmt(remaining)} tot gratis verzending` : '✓ Gratis verzending';
+  }
+
+  document.addEventListener('DOMContentLoaded', render);
+  window.addEventListener('cart:updated', render);
+})();
+</script>

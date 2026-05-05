@@ -1,0 +1,151 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Gepersonaliseerd — Natural ByRoos">
+  <main class="pt-20">
+
+    <!-- Hero -->
+    <section class="relative min-h-[80vh] flex items-end overflow-hidden" style="background: var(--color-forest);">
+      <img src="/images/personalised-soap-real.jpg" alt="Gepersonaliseerde zeep"
+           class="absolute inset-0 w-full h-full object-cover opacity-50" />
+      <div class="absolute inset-0" style="background: linear-gradient(180deg, rgba(45,90,39,0.3) 0%, rgba(28,28,28,0.85) 100%);"></div>
+
+      <div class="relative max-w-[1440px] mx-auto px-6 lg:px-12 pb-20 lg:pb-28 w-full text-white">
+        <div class="max-w-3xl">
+          <div class="flex items-center gap-3 mb-6">
+            <span class="block w-10 h-px" style="background: var(--color-amber-light);"></span>
+            <span class="text-[11px] uppercase tracking-[0.18em]" style="color: var(--color-amber-light); font-family: var(--font-body);">Gepersonaliseerd · Op maat gemaakt</span>
+          </div>
+          <h1 class="text-[clamp(3rem,8vw,7rem)] leading-[0.95] mb-8" style="font-family: var(--font-heading); font-weight: 300;">
+            Maak het<br/><em style="color: var(--color-amber-light);">helemaal van jou.</em>
+          </h1>
+          <p class="text-lg lg:text-xl leading-[1.6] max-w-xl mb-10" style="font-family: var(--font-body); font-weight: 300; color: rgba(255,255,255,0.85);">
+            Zeep met jouw naam. Badzout met je bedrijfslogo. Cadeauboxen samengesteld voor één bijzondere gelegenheid. Alles met de hand gemaakt in mijn atelier in Grijpskerke.
+          </p>
+          <div class="flex flex-wrap gap-3">
+            <a href="/gepersonaliseerd/configurator" class="btn-primary" style="background: var(--color-amber);">
+              Open de configurator
+              <svg class="w-3.5 h-3.5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clip-rule="evenodd"/></svg>
+            </a>
+            <a href="#categorieen" class="btn-outline" style="color: white; border-color: rgba(255,255,255,0.4);">Bekijk opties</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Categories -->
+    <section id="categorieen" class="py-24 lg:py-32" style="background: var(--color-white);">
+      <div class="max-w-[1440px] mx-auto px-6 lg:px-12">
+
+        <div class="max-w-2xl mb-16 lg:mb-20">
+          <span class="section-label block mb-4">Vier mogelijkheden</span>
+          <h2 class="text-4xl lg:text-5xl leading-[1.05]" style="font-family: var(--font-heading); color: var(--color-ink); font-weight: 300;">
+            Eén heldere categorie,<br/><em style="color: var(--color-forest);">vier richtingen.</em>
+          </h2>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-6 lg:gap-8">
+          {[
+            {
+              id: 'zeep',
+              title: 'Zeep op maat',
+              tag: 'Vanaf 1 stuk',
+              desc: 'Onze signature: handgegoten zeep met jouw naam, datum of korte boodschap. Vorm, geur en tekst stel je zelf samen via de configurator.',
+              cta: 'Open de configurator',
+              ctaHref: '/gepersonaliseerd/configurator',
+              image: '/images/personalised-soap-real.jpg',
+              price: 'v.a. €4,50',
+            },
+            {
+              id: 'badzout',
+              title: 'Zakjes badzout',
+              tag: 'Vanaf 10 stuks',
+              desc: 'Verzorgend badzout in handgevulde zakjes met persoonlijk label. Kies geur, kleur en tekst. Ideaal als bedankje of relatiegeschenk.',
+              cta: 'Naar product',
+              ctaHref: '/shop/badzout-zakje-personalised',
+              image: '/images/product-display-1.jpg',
+              price: 'v.a. €3,50',
+            },
+            {
+              id: 'cadeauboxen',
+              title: 'Cadeauboxen',
+              tag: 'Volledig samengesteld',
+              desc: 'Van klein bedankboxje tot luxe pakket. We stellen samen wat bij jouw gelegenheid past — eigen branding, mooie verpakking en een handgeschreven kaartje.',
+              cta: 'Vraag samenstelling aan',
+              ctaHref: '/contact?subject=cadeaubox',
+              image: '/images/giftset.jpg',
+              price: 'v.a. €12,50',
+            },
+            {
+              id: 'zakelijk',
+              title: 'Voor bedrijven',
+              tag: 'B2B · Vanaf 25 stuks',
+              desc: 'Personeelscadeaus, klantgeschenken, merchandise met huisstijl. Duurzame producten die mensen écht gebruiken. Factuur op bedrijfsnaam.',
+              cta: 'Offerte aanvragen',
+              ctaHref: '/contact?subject=zakelijk',
+              image: '/images/shop-display.jpg',
+              price: 'Op aanvraag',
+            },
+          ].map(cat => (
+            <article id={cat.id} class="group rounded-[2px] overflow-hidden" style="background: var(--color-cream);">
+              <a href={cat.ctaHref} class="block">
+                <div class="aspect-[16/10] overflow-hidden">
+                  <img src={cat.image} alt={cat.title}
+                       class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                </div>
+                <div class="p-8 lg:p-10">
+                  <div class="flex items-center justify-between mb-4">
+                    <span class="text-[10px] uppercase tracking-[0.18em]" style="color: var(--color-sage); font-family: var(--font-body);">{cat.tag}</span>
+                    <span class="text-sm" style="color: var(--color-forest); font-family: var(--font-heading);">{cat.price}</span>
+                  </div>
+                  <h3 class="text-3xl lg:text-4xl mb-4" style="font-family: var(--font-heading); color: var(--color-ink); font-weight: 400;">{cat.title}</h3>
+                  <p class="text-sm leading-[1.7] mb-6" style="color: var(--color-ink-soft); font-family: var(--font-body); font-weight: 300;">{cat.desc}</p>
+                  <span class="inline-flex items-center gap-2 text-sm font-medium border-b pb-1 transition-all group-hover:gap-3"
+                        style="color: var(--color-ink); font-family: var(--font-body); border-color: var(--color-ink);">
+                    {cat.cta}
+                    <svg class="w-3.5 h-3.5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clip-rule="evenodd"/></svg>
+                  </span>
+                </div>
+              </a>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Process -->
+    <section class="py-24 lg:py-32" style="background: var(--color-cream);">
+      <div class="max-w-[1440px] mx-auto px-6 lg:px-12">
+        <div class="grid lg:grid-cols-12 gap-12">
+          <div class="lg:col-span-4">
+            <span class="section-label block mb-4">Het proces</span>
+            <h2 class="text-3xl lg:text-4xl mb-6" style="font-family: var(--font-heading); color: var(--color-ink); font-weight: 300;">
+              Van idee tot eindresultaat in <em style="color: var(--color-forest);">vier stappen</em>
+            </h2>
+          </div>
+          <div class="lg:col-span-8">
+            {[
+              { step: '01', title: 'Kies of vraag aan', desc: 'Gebruik de configurator voor losse stuks, of stuur een bericht voor cadeauboxen, B2B en grotere bestellingen.', time: 'Reactie binnen 24u' },
+              { step: '02', title: 'Ontwerp & proef', desc: 'Voor bestellingen vanaf 10 stuks maak ik een proefexemplaar zodat je het in handen hebt vóór productie.', time: '3–5 werkdagen' },
+              { step: '03', title: 'Productie', desc: 'Alles met de hand gemaakt in mijn atelier in Grijpskerke. Zorgvuldig, in jouw tempo.', time: '1–3 weken' },
+              { step: '04', title: 'Afhalen of bezorgen', desc: 'Afhalen kost niks — Grijpskerke, Kloetinge of Burgh-Haamstede. Verzenden via PostNL.', time: 'Op afspraak' },
+            ].map(step => (
+              <div class="grid grid-cols-12 gap-4 py-8 border-t" style="border-color: var(--color-sand-dark);">
+                <span class="col-span-2 text-2xl font-light" style="color: var(--color-sage); font-family: var(--font-heading);">{step.step}</span>
+                <div class="col-span-10 lg:col-span-7">
+                  <h4 class="text-xl mb-2" style="font-family: var(--font-heading); color: var(--color-ink); font-weight: 400;">{step.title}</h4>
+                  <p class="text-sm leading-[1.7]" style="color: var(--color-ink-soft); font-family: var(--font-body); font-weight: 300;">{step.desc}</p>
+                </div>
+                <div class="col-span-12 lg:col-span-3 lg:text-right">
+                  <span class="text-[11px] uppercase tracking-[0.15em]" style="color: var(--color-muted); font-family: var(--font-body);">{step.time}</span>
+                </div>
+              </div>
+            ))}
+            <div class="border-t" style="border-color: var(--color-sand-dark);"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
