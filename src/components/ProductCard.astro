@@ -44,8 +44,8 @@ const productJson = JSON.stringify({
 
   <!-- Quick add button (overlay) -->
   <button data-quick-add={productJson}
-          class="absolute top-3 right-3 w-9 h-9 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-300 hover:scale-110"
-          style="background: var(--color-white); box-shadow: 0 4px 12px rgba(0,0,0,0.1);"
+          class="absolute top-3 right-3 w-10 h-10 z-10 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:scale-110"
+          style="background: var(--color-white); box-shadow: 0 4px 12px rgba(0,0,0,0.15); pointer-events: auto; transition: opacity 0.3s ease, transform 0.2s ease;"
           aria-label="Snel toevoegen">
     <svg class="w-4 h-4" style="color: var(--color-forest);" viewBox="0 0 20 20" fill="currentColor"><path d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z"/></svg>
   </button>

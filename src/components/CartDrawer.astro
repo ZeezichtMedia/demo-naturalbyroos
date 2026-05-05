@@ -4,12 +4,12 @@
 <div id="toast-container" class="fixed top-24 right-6 z-[100] flex flex-col gap-2 pointer-events-none"></div>
 
 <!-- Cart drawer overlay -->
-<div id="cart-overlay" class="fixed inset-0 z-[90] opacity-0 invisible transition-all duration-300"
-     style="background: rgba(28, 28, 28, 0.4); backdrop-filter: blur(4px);"></div>
+<div id="cart-overlay" class="fixed inset-0 z-[90] transition-opacity duration-300 pointer-events-none"
+     style="background: rgba(28, 28, 28, 0.4); backdrop-filter: blur(4px); opacity: 0;"></div>
 
 <!-- Cart drawer -->
-<aside id="cart-drawer" class="fixed top-0 right-0 h-full w-full sm:w-[440px] z-[95] translate-x-full transition-transform duration-400 flex flex-col"
-       style="background: var(--color-cream); box-shadow: -20px 0 60px rgba(0,0,0,0.15);">
+<aside id="cart-drawer" class="fixed top-0 right-0 h-full w-full sm:w-[440px] z-[95] flex flex-col"
+       style="background: var(--color-cream); box-shadow: -20px 0 60px rgba(0,0,0,0.15); transform: translateX(100%); transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);">
 
   <!-- Header -->
   <div class="flex items-center justify-between px-6 py-5 border-b" style="border-color: var(--color-sand-dark);">
@@ -215,17 +215,21 @@
     }
 
     function openDrawer() {
-      document.getElementById('cart-overlay').style.opacity = '1';
-      document.getElementById('cart-overlay').style.visibility = 'visible';
-      document.getElementById('cart-drawer').style.transform = 'translateX(0)';
+      const ov = document.getElementById('cart-overlay');
+      const dr = document.getElementById('cart-drawer');
+      ov.style.opacity = '1';
+      ov.style.pointerEvents = 'auto';
+      dr.style.transform = 'translateX(0)';
       document.body.style.overflow = 'hidden';
       renderDrawer();
     }
 
     function closeDrawer() {
-      document.getElementById('cart-overlay').style.opacity = '0';
-      document.getElementById('cart-overlay').style.visibility = 'hidden';
-      document.getElementById('cart-drawer').style.transform = 'translateX(100%)';
+      const ov = document.getElementById('cart-overlay');
+      const dr = document.getElementById('cart-drawer');
+      ov.style.opacity = '0';
+      ov.style.pointerEvents = 'none';
+      dr.style.transform = 'translateX(100%)';
       document.body.style.overflow = '';
     }
 
@@ -233,9 +237,12 @@
       const container = document.getElementById('toast-container');
       if (!container) return;
       const toast = document.createElement('div');
-      toast.className = 'toast pointer-events-auto rounded-[2px] shadow-2xl flex items-center gap-3 p-3 pr-5 max-w-sm transform translate-x-full opacity-0 transition-all duration-300';
+      toast.className = 'toast pointer-events-auto rounded-[2px] shadow-2xl flex items-center gap-3 p-3 pr-5 max-w-sm';
       toast.style.background = 'var(--color-white)';
       toast.style.borderLeft = '3px solid var(--color-sage)';
+      toast.style.transform = 'translateX(120%)';
+      toast.style.opacity = '0';
+      toast.style.transition = 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease';
       toast.innerHTML = `
         ${image ? `<img src="${image}" class="w-12 h-12 object-cover rounded-[2px]" />` : ''}
         <div class="flex-1">
@@ -245,8 +252,10 @@
       `;
       container.appendChild(toast);
       requestAnimationFrame(() => {
-        toast.style.transform = 'translateX(0)';
-        toast.style.opacity = '1';
+        requestAnimationFrame(() => {
+          toast.style.transform = 'translateX(0)';
+          toast.style.opacity = '1';
+        });
       });
       setTimeout(() => {
         toast.style.transform = 'translateX(120%)';
