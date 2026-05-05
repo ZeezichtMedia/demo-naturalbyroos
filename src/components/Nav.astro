@@ -1,0 +1,265 @@
+---
+const navItems = [
+  {
+    label: 'Shop',
+    href: '#shop',
+    dropdown: {
+      type: 'shop',
+      groups: [
+        {
+          title: 'Categorieën',
+          items: [
+            { label: 'Cadeaus & brievenbus', href: '#cadeaus' },
+            { label: 'Natural ByRoos', href: '#nbr' },
+            { label: 'Loveli', href: '#loveli' },
+            { label: 'Beesha', href: '#beesha' },
+            { label: 'Cosmeau / Bamboozy', href: '#cosmeau' },
+            { label: 'Ben&Anna', href: '#bennanna' },
+            { label: 'Shampoobars', href: '#shampoobars' },
+            { label: 'Accessoires', href: '#accessoires' },
+          ],
+        },
+      ],
+      featured: {
+        image: '/images/shop-display.jpg',
+        label: 'Bestseller',
+        title: 'Ambachtelijke zeep',
+        price: '€6,50',
+        href: '#shop',
+      },
+    },
+  },
+  {
+    label: 'Gepersonaliseerd',
+    href: '#gepersonaliseerd',
+    badge: 'Nieuw',
+    dropdown: {
+      type: 'personalised',
+      groups: [
+        {
+          title: 'Gepersonaliseerde artikelen',
+          items: [
+            { label: 'Zeep op maat', href: '#zeep', desc: 'Naam, logo of boodschap' },
+            { label: 'Zakjes badzout', href: '#badzout', desc: 'Persoonlijk label' },
+            { label: 'Cadeauboxen', href: '#cadeauboxen', desc: 'Samengestelde sets' },
+            { label: 'Voor bedrijven', href: '#zakelijk', desc: 'Relatiegeschenken' },
+          ],
+        },
+      ],
+      featured: {
+        image: '/images/personalised-soap-real.jpg',
+        label: 'Op maat gemaakt',
+        title: 'Gouden Lavendel zeep "Roosjes"',
+        price: 'v.a. €4,50',
+        href: '#zeep',
+      },
+    },
+  },
+  { label: 'Workshops', href: '#workshops' },
+  { label: 'Blog', href: '#blog' },
+  { label: 'Over', href: '#over' },
+  { label: 'Contact', href: '#contact' },
+];
+---
+
+<header id="site-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+  <div class="max-w-[1440px] mx-auto px-6 lg:px-12">
+    <nav class="flex items-center justify-between h-20">
+
+      <!-- Logo -->
+      <a href="/" class="flex items-center gap-3 group">
+        <img src="/images/NaturalByRoos_Logo_Rond.jpg" alt="Natural ByRoos"
+             class="w-11 h-11 rounded-full object-cover ring-1 transition-all duration-300 group-hover:ring-2"
+             style="ring-color: var(--color-sand-dark);" />
+        <div class="hidden sm:block">
+          <span class="block text-[15px] font-medium leading-none tracking-tight" style="color: var(--color-ink); font-family: var(--font-body);">Natural ByRoos</span>
+          <span class="block text-[10px] leading-none mt-1.5 uppercase tracking-[0.18em]" style="color: var(--color-sage); font-family: var(--font-body);">Duurzaam dichtbij</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav -->
+      <ul class="hidden lg:flex items-center">
+        {navItems.map((item) => (
+          <li class="relative group">
+            {item.dropdown ? (
+              <button class="flex items-center gap-1.5 px-4 py-3 text-[13px] font-medium tracking-wide transition-colors duration-200"
+                      style="color: var(--color-ink-soft); font-family: var(--font-body);">
+                {item.label}
+                {item.badge && (
+                  <span class="text-[9px] uppercase tracking-[0.1em] px-1.5 py-0.5 rounded font-semibold" style="background: var(--color-amber); color: white;">{item.badge}</span>
+                )}
+                <svg class="w-3 h-3 transition-transform duration-300 group-hover:rotate-180" style="color: var(--color-sage)" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+                </svg>
+              </button>
+
+              <!-- Editorial dropdown -->
+              <div class="absolute top-full left-1/2 -translate-x-1/2 pt-2 w-[640px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 translate-y-2 group-hover:translate-y-0">
+                <div class="rounded-[2px] shadow-[0_30px_80px_-20px_rgba(0,0,0,0.18)] overflow-hidden grid grid-cols-5"
+                     style="background: var(--color-white); border: 1px solid var(--color-sand-dark);">
+
+                  <!-- Items column (left, 3/5) -->
+                  <div class="col-span-3 p-7">
+                    {item.dropdown.groups.map((group) => (
+                      <div>
+                        <p class="text-[10px] uppercase tracking-[0.18em] mb-4 pb-3 border-b" style="color: var(--color-sage); font-family: var(--font-body); border-color: var(--color-sand);">
+                          {group.title}
+                        </p>
+                        <ul class="space-y-0">
+                          {group.items.map((sub) => (
+                            <li>
+                              <a href={sub.href}
+                                 class="dropdown-item block py-2 px-2 -mx-2 rounded-[2px] transition-all duration-200">
+                                <div class="flex items-baseline justify-between">
+                                  <span class="text-[14px] tracking-tight" style="color: var(--color-ink); font-family: var(--font-body);">
+                                    {sub.label}
+                                  </span>
+                                  {sub.desc && (
+                                    <span class="text-[11px]" style="color: var(--color-muted); font-family: var(--font-body);">{sub.desc}</span>
+                                  )}
+                                </div>
+                              </a>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
+
+                  <!-- Featured column (right, 2/5) -->
+                  <a href={item.dropdown.featured.href}
+                     class="col-span-2 relative overflow-hidden group/feat block">
+                    <img src={item.dropdown.featured.image} alt={item.dropdown.featured.title}
+                         class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover/feat:scale-105" />
+                    <div class="absolute inset-0" style="background: linear-gradient(180deg, transparent 30%, rgba(0,0,0,0.7) 100%);"></div>
+                    <div class="relative h-full min-h-[280px] flex flex-col justify-end p-5 text-white">
+                      <span class="text-[10px] uppercase tracking-[0.2em] mb-1 opacity-80" style="font-family: var(--font-body);">{item.dropdown.featured.label}</span>
+                      <h4 class="text-xl mb-2 leading-tight" style="font-family: var(--font-heading); font-weight: 400;">{item.dropdown.featured.title}</h4>
+                      <div class="flex items-center justify-between">
+                        <span class="text-sm" style="font-family: var(--font-body);">{item.dropdown.featured.price}</span>
+                        <span class="flex items-center gap-1 text-[11px] uppercase tracking-[0.15em]" style="font-family: var(--font-body);">
+                          Bekijk
+                          <svg class="w-3 h-3 transition-transform duration-200 group-hover/feat:translate-x-0.5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clip-rule="evenodd"/></svg>
+                        </span>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            ) : (
+              <a href={item.href}
+                 class="block px-4 py-3 text-[13px] font-medium tracking-wide transition-colors duration-200 hover:opacity-60"
+                 style="color: var(--color-ink-soft); font-family: var(--font-body);">
+                {item.label}
+              </a>
+            )}
+          </li>
+        ))}
+      </ul>
+
+      <!-- Right actions -->
+      <div class="flex items-center gap-1.5">
+        <button class="hidden lg:flex p-2.5 rounded-full transition-colors duration-200 hover:bg-white/50" aria-label="Zoeken">
+          <svg class="w-4 h-4" style="color: var(--color-ink-soft);" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clip-rule="evenodd"/></svg>
+        </button>
+        <button class="hidden lg:flex p-2.5 rounded-full transition-colors duration-200 hover:bg-white/50" aria-label="Account">
+          <svg class="w-4 h-4" style="color: var(--color-ink-soft);" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/></svg>
+        </button>
+        <button class="hidden lg:flex p-2.5 rounded-full transition-colors duration-200 hover:bg-white/50 relative" aria-label="Winkelmand">
+          <svg class="w-4 h-4" style="color: var(--color-ink-soft);" viewBox="0 0 20 20" fill="currentColor"><path d="M1 1.75A.75.75 0 011.75 1h1.628a1.75 1.75 0 011.734 1.51L5.18 3a65.25 65.25 0 0113.36 1.412.75.75 0 01.58.875 48.645 48.645 0 01-1.618 6.2.75.75 0 01-.712.513H6a2.503 2.503 0 00-2.292 1.5H17.25a.75.75 0 010 1.5H2.76a.75.75 0 01-.748-.807 4.002 4.002 0 012.716-3.486L3.626 2.716a.25.25 0 00-.248-.216H1.75A.75.75 0 011 1.75zM6 17.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zm10 0a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"/></svg>
+          <span class="absolute -top-0.5 -right-0.5 w-4 h-4 rounded-full text-[10px] font-semibold flex items-center justify-center text-white" style="background: var(--color-forest);">2</span>
+        </button>
+        <a href="#contact" class="hidden lg:inline-flex btn-primary text-xs py-2.5 px-5 ml-2">Offerte</a>
+
+        <!-- Mobile hamburger -->
+        <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-full" style="color: var(--color-ink);" aria-label="Menu openen">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+    </nav>
+  </div>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="hidden lg:hidden border-t" style="background: var(--color-white); border-color: var(--color-sand);">
+    <div class="max-w-7xl mx-auto px-6 py-4 space-y-1">
+      {navItems.map((item) => (
+        <div>
+          {item.dropdown ? (
+            <div>
+              <button class="mobile-dropdown-btn w-full flex items-center justify-between px-3 py-3 text-sm font-medium border-b"
+                      style="color: var(--color-ink); font-family: var(--font-body); border-color: var(--color-sand);">
+                <span class="flex items-center gap-2">
+                  {item.label}
+                  {item.badge && <span class="text-[9px] uppercase tracking-[0.1em] px-1.5 py-0.5 rounded font-semibold" style="background: var(--color-amber); color: white;">{item.badge}</span>}
+                </span>
+                <svg class="w-4 h-4 transition-transform" style="color: var(--color-sage)" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+                </svg>
+              </button>
+              <div class="mobile-dropdown-panel hidden pl-4 py-2 space-y-1">
+                {item.dropdown.groups.flatMap(g => g.items).map((sub) => (
+                  <a href={sub.href} class="block px-3 py-2 text-[13px]" style="color: var(--color-ink-soft); font-family: var(--font-body);">
+                    {sub.label}
+                  </a>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <a href={item.href} class="block px-3 py-3 text-sm font-medium border-b"
+               style="color: var(--color-ink); font-family: var(--font-body); border-color: var(--color-sand);">
+              {item.label}
+            </a>
+          )}
+        </div>
+      ))}
+      <div class="pt-4 pb-1 flex flex-col gap-2">
+        <a href="#contact" class="btn-primary text-sm text-center justify-center">Offerte aanvragen</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<style>
+  .dropdown-item:hover {
+    background-color: var(--color-cream);
+    padding-left: 0.75rem;
+  }
+  .dropdown-item {
+    transition: padding-left 0.2s ease, background-color 0.2s ease;
+  }
+</style>
+
+<script>
+  const header = document.getElementById('site-header');
+  const updateHeader = () => {
+    if (!header) return;
+    if (window.scrollY > 20) {
+      header.style.background = 'rgba(247, 242, 234, 0.96)';
+      header.style.backdropFilter = 'blur(12px)';
+      header.style.boxShadow = '0 1px 0 rgba(0,0,0,0.05)';
+    } else {
+      header.style.background = 'transparent';
+      header.style.backdropFilter = 'none';
+      header.style.boxShadow = 'none';
+    }
+  };
+  window.addEventListener('scroll', updateHeader);
+  updateHeader();
+
+  const mobileBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  mobileBtn?.addEventListener('click', () => {
+    mobileMenu?.classList.toggle('hidden');
+  });
+
+  document.querySelectorAll('.mobile-dropdown-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const panel = btn.nextElementSibling;
+      panel?.classList.toggle('hidden');
+      const arrow = btn.querySelector('svg:last-child');
+      arrow?.classList.toggle('rotate-180');
+    });
+  });
+</script>

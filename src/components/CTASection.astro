@@ -1,0 +1,132 @@
+---
+---
+<section id="contact" class="py-32 lg:py-40 relative overflow-hidden" style="background: var(--color-sand);">
+  <div class="max-w-[1440px] mx-auto px-6 lg:px-12">
+    <div class="grid lg:grid-cols-12 gap-12 lg:gap-20">
+
+      <!-- Left: editorial intro + image -->
+      <div class="lg:col-span-5">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="block w-10 h-px" style="background: var(--color-sage);"></span>
+          <span class="section-label">Contact · 05</span>
+        </div>
+        <h2 class="text-[clamp(2.5rem,5vw,4.5rem)] leading-[1.05] mb-8" style="font-family: var(--font-heading); color: var(--color-ink); font-weight: 300;">
+          Vertel me wat<br/><em style="color: var(--color-forest);">jij voor ogen hebt.</em>
+        </h2>
+
+        <p class="text-base leading-[1.7] mb-10 max-w-md" style="color: var(--color-ink-soft); font-family: var(--font-body); font-weight: 300;">
+          Of het nu om een klein persoonlijk cadeau gaat of een zakelijke bestelling van honderden stuks — ik denk graag met je mee. Geen verplichtingen, gewoon een goed gesprek.
+        </p>
+
+        <!-- Roos quote card -->
+        <div class="relative aspect-[4/5] max-w-sm overflow-hidden rounded-[2px]" style="background: var(--color-forest);">
+          <img src="/images/workshop.jpg" alt="Roos van Natural ByRoos"
+               class="absolute inset-0 w-full h-full object-cover opacity-90" />
+          <div class="absolute inset-0" style="background: linear-gradient(180deg, transparent 40%, rgba(45,90,39,0.85) 100%);"></div>
+          <div class="absolute inset-x-0 bottom-0 p-6 lg:p-8 text-white">
+            <p class="text-lg lg:text-xl leading-snug mb-4" style="font-family: var(--font-heading); font-weight: 300; font-style: italic;">
+              "Ik help je graag met het uitzoeken van geur, ontwerp en aantal. Persoonlijk contact maakt het verschil."
+            </p>
+            <div class="flex items-center justify-between pt-4 border-t" style="border-color: rgba(255,255,255,0.2);">
+              <div>
+                <p class="text-sm font-medium" style="font-family: var(--font-body);">Roos</p>
+                <p class="text-[11px] uppercase tracking-[0.15em] opacity-70 mt-0.5" style="font-family: var(--font-body);">Eigenaar · Sinds 2021</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: contact form -->
+      <div class="lg:col-span-7">
+        <div class="rounded-[2px] p-8 lg:p-12 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.1)]" style="background: var(--color-white);">
+          <h3 class="text-3xl mb-2" style="font-family: var(--font-heading); color: var(--color-ink); font-weight: 400;">Stuur een bericht</h3>
+          <p class="text-sm mb-8" style="color: var(--color-muted); font-family: var(--font-body);">Reactie binnen 24 uur</p>
+
+          <form class="space-y-5" onsubmit="return false;">
+            <div class="grid sm:grid-cols-2 gap-5">
+              <div>
+                <label class="block text-[10px] uppercase tracking-[0.18em] mb-2" style="color: var(--color-muted); font-family: var(--font-body);">Naam</label>
+                <input type="text" placeholder="Jouw naam"
+                       class="form-input w-full px-0 py-3 text-base bg-transparent border-0 border-b outline-none transition-colors duration-200"
+                       style="border-color: var(--color-sand-dark); color: var(--color-ink); font-family: var(--font-body);" />
+              </div>
+              <div>
+                <label class="block text-[10px] uppercase tracking-[0.18em] mb-2" style="color: var(--color-muted); font-family: var(--font-body);">E-mail</label>
+                <input type="email" placeholder="jouw@email.nl"
+                       class="form-input w-full px-0 py-3 text-base bg-transparent border-0 border-b outline-none transition-colors duration-200"
+                       style="border-color: var(--color-sand-dark); color: var(--color-ink); font-family: var(--font-body);" />
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-[10px] uppercase tracking-[0.18em] mb-2" style="color: var(--color-muted); font-family: var(--font-body);">Onderwerp</label>
+              <select class="form-input w-full px-0 py-3 text-base bg-transparent border-0 border-b outline-none transition-colors duration-200 appearance-none"
+                      style="border-color: var(--color-sand-dark); color: var(--color-ink); font-family: var(--font-body); background-image: url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%237A7060' viewBox='0 0 20 20'%3E%3Cpath fill-rule='evenodd' d='M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z' clip-rule='evenodd'/%3E%3C/svg%3E&quot;); background-repeat: no-repeat; background-position: right center; background-size: 16px;">
+                <option value="">Selecteer een onderwerp</option>
+                <option>Gepersonaliseerde zeep</option>
+                <option>Zakjes badzout</option>
+                <option>Cadeauboxen</option>
+                <option>Zakelijke bestelling</option>
+                <option>Eigen productlijn</option>
+                <option>Anders</option>
+              </select>
+            </div>
+
+            <div class="grid sm:grid-cols-2 gap-5">
+              <div>
+                <label class="block text-[10px] uppercase tracking-[0.18em] mb-2" style="color: var(--color-muted); font-family: var(--font-body);">Aantal (indicatief)</label>
+                <input type="text" placeholder="bijv. 50 stuks"
+                       class="form-input w-full px-0 py-3 text-base bg-transparent border-0 border-b outline-none transition-colors duration-200"
+                       style="border-color: var(--color-sand-dark); color: var(--color-ink); font-family: var(--font-body);" />
+              </div>
+              <div>
+                <label class="block text-[10px] uppercase tracking-[0.18em] mb-2" style="color: var(--color-muted); font-family: var(--font-body);">Wensdatum</label>
+                <input type="text" placeholder="bijv. juni 2025"
+                       class="form-input w-full px-0 py-3 text-base bg-transparent border-0 border-b outline-none transition-colors duration-200"
+                       style="border-color: var(--color-sand-dark); color: var(--color-ink); font-family: var(--font-body);" />
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-[10px] uppercase tracking-[0.18em] mb-2" style="color: var(--color-muted); font-family: var(--font-body);">Bericht</label>
+              <textarea rows="3" placeholder="Vertel me meer over jouw idee..."
+                        class="form-input w-full px-0 py-3 text-base bg-transparent border-0 border-b outline-none transition-colors duration-200 resize-none"
+                        style="border-color: var(--color-sand-dark); color: var(--color-ink); font-family: var(--font-body);"></textarea>
+            </div>
+
+            <button type="submit" class="btn-primary text-sm py-4 px-8 mt-4 w-full sm:w-auto justify-center">
+              Verstuur bericht
+              <svg class="w-3.5 h-3.5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clip-rule="evenodd"/></svg>
+            </button>
+          </form>
+
+          <div class="mt-12 pt-8 border-t grid sm:grid-cols-3 gap-6" style="border-color: var(--color-sand-dark);">
+            <div>
+              <p class="text-[10px] uppercase tracking-[0.18em] mb-2" style="color: var(--color-muted); font-family: var(--font-body);">E-mail</p>
+              <a href="mailto:info@naturalbyroos.nl" class="text-sm" style="color: var(--color-ink); font-family: var(--font-body);">info@naturalbyroos.nl</a>
+            </div>
+            <div>
+              <p class="text-[10px] uppercase tracking-[0.18em] mb-2" style="color: var(--color-muted); font-family: var(--font-body);">Afhalen</p>
+              <p class="text-sm" style="color: var(--color-ink); font-family: var(--font-body);">Grijpskerke<br/>Kloetinge<br/>Burgh-Haamstede</p>
+            </div>
+            <div>
+              <p class="text-[10px] uppercase tracking-[0.18em] mb-2" style="color: var(--color-muted); font-family: var(--font-body);">Bedrijf</p>
+              <p class="text-sm" style="color: var(--color-ink); font-family: var(--font-body);">Natural ByRoos<br/>Sinds 2021<br/>KvK 81623259</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .form-input:focus {
+    border-color: var(--color-forest) !important;
+  }
+  .form-input::placeholder {
+    color: var(--color-muted);
+    opacity: 0.6;
+  }
+</style>

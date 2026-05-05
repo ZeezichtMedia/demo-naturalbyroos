@@ -1,0 +1,168 @@
+---
+const products = [
+  {
+    image: '/images/personalised-soap-real.jpg',
+    title: 'Zeep op maat',
+    subtitle: 'Vanaf 10 stuks',
+    description: 'Handgegoten zeep met jouw naam, logo, geboortedatum of persoonlijke boodschap. Voor bruiloften, jubilea of als bedrijfscadeau.',
+    tags: ['Bruiloft', 'Zakelijk', 'Cadeau'],
+    price: 'v.a. €4,50',
+    popular: true,
+  },
+  {
+    image: '/images/ambachtelijke-zeep.jpg',
+    title: 'Zakjes badzout',
+    subtitle: 'Nieuw in 2025',
+    description: 'Verzorgende badzoutzakjes met persoonlijk label. Kies geur, kleur en tekst. Ideaal als bedankje, relatiegeschenk of eigen lijn.',
+    tags: ['Wellness', 'B2B'],
+    price: 'v.a. €3,50',
+    popular: false,
+  },
+  {
+    image: '/images/giftset.jpg',
+    title: 'Cadeauboxen',
+    subtitle: 'Volledig samengesteld',
+    description: 'Van kleine bedankboxjes tot uitgebreide luxe pakketten. Wij stellen samen wat bij jouw gelegenheid past, met eigen branding.',
+    tags: ['Relatiegeschenk', 'Event'],
+    price: 'v.a. €12,50',
+    popular: false,
+  },
+  {
+    image: '/images/shop-display.jpg',
+    title: 'Eigen productlijn',
+    subtitle: 'Voor ondernemers',
+    description: 'Start jouw eigen lijn met white-label producten. Van logo op de verpakking tot volledig eigen huisstijl. Wij produceren, jij verkoopt.',
+    tags: ['White-label', 'Groothandel'],
+    price: 'Op aanvraag',
+    popular: false,
+  },
+];
+---
+
+<section id="gepersonaliseerd" class="py-32 lg:py-40" style="background: var(--color-white);">
+  <div class="max-w-[1440px] mx-auto px-6 lg:px-12">
+
+    <!-- Section header -->
+    <div class="grid lg:grid-cols-12 gap-8 mb-20 lg:mb-28">
+      <div class="lg:col-span-4">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="block w-10 h-px" style="background: var(--color-sage);"></span>
+          <span class="section-label">Maatwerk · 02</span>
+        </div>
+        <h2 class="text-[clamp(2.5rem,5vw,4.5rem)] leading-[1.05]"
+            style="font-family: var(--font-heading); color: var(--color-ink); font-weight: 300;">
+          Elk product<br/>vertelt <em style="color: var(--color-forest);">jouw verhaal.</em>
+        </h2>
+      </div>
+      <div class="lg:col-span-7 lg:col-start-7 lg:pt-8">
+        <p class="text-base lg:text-lg leading-[1.7] mb-6"
+           style="color: var(--color-ink-soft); font-family: var(--font-body); font-weight: 300;">
+          Van één bijzondere zeep tot honderden zakelijke relatiegeschenken. We maken het op maat — duurzaam, lokaal in Zeeland en met aandacht voor detail. Onder één heldere categorie: gepersonaliseerde artikelen.
+        </p>
+        <a href="#contact" class="text-sm font-medium border-b pb-1 inline-block transition-opacity hover:opacity-60"
+           style="color: var(--color-ink); font-family: var(--font-body); border-color: var(--color-ink);">
+          Vraag vrijblijvend een offerte aan
+        </a>
+      </div>
+    </div>
+
+    <!-- Products grid -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-x-5 gap-y-12">
+      {products.map((product, idx) => (
+        <article class="group cursor-pointer">
+          <!-- Image -->
+          <div class="relative aspect-[3/4] mb-5 overflow-hidden rounded-[2px]" style="background: var(--color-sand);">
+            <img src={product.image} alt={product.title}
+                 class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+            {product.popular && (
+              <div class="absolute top-3 left-3">
+                <span class="text-[10px] uppercase tracking-[0.18em] px-2.5 py-1 rounded-[2px] font-medium"
+                      style="background: var(--color-white); color: var(--color-ink); font-family: var(--font-body);">
+                  Populair
+                </span>
+              </div>
+            )}
+            <div class="absolute top-3 right-3">
+              <span class="text-[11px] uppercase tracking-[0.15em] px-2.5 py-1 rounded-[2px] font-medium"
+                    style="background: rgba(255,255,255,0.9); color: var(--color-ink-soft); font-family: var(--font-body);">
+                {String(idx + 1).padStart(2, '0')}
+              </span>
+            </div>
+
+            <!-- Hover overlay with CTA -->
+            <div class="absolute inset-x-0 bottom-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                 style="background: linear-gradient(180deg, transparent, rgba(0,0,0,0.5));">
+              <a href="#contact" class="block w-full text-center text-xs uppercase tracking-[0.18em] py-3 rounded-[2px] font-medium transition-colors"
+                 style="background: var(--color-white); color: var(--color-ink); font-family: var(--font-body);">
+                Meer informatie
+              </a>
+            </div>
+          </div>
+
+          <!-- Info -->
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-[11px] uppercase tracking-[0.15em]" style="color: var(--color-sage); font-family: var(--font-body);">{product.subtitle}</span>
+              <span class="text-sm" style="color: var(--color-forest); font-family: var(--font-heading); font-weight: 400;">{product.price}</span>
+            </div>
+            <h3 class="text-2xl leading-tight" style="font-family: var(--font-heading); color: var(--color-ink); font-weight: 400;">
+              {product.title}
+            </h3>
+            <p class="text-[13px] leading-relaxed" style="color: var(--color-muted); font-family: var(--font-body); font-weight: 300;">
+              {product.description}
+            </p>
+            <div class="flex flex-wrap gap-1.5 pt-1">
+              {product.tags.map(tag => (
+                <span class="text-[10px] uppercase tracking-[0.1em] px-2 py-0.5 rounded-[2px] font-medium border"
+                      style="color: var(--color-muted); border-color: var(--color-sand-dark); font-family: var(--font-body);">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <!-- Process section -->
+    <div class="mt-24 lg:mt-32 grid lg:grid-cols-12 gap-12 items-start">
+      <div class="lg:col-span-4 lg:sticky lg:top-32">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="block w-10 h-px" style="background: var(--color-sage);"></span>
+          <span class="section-label">Het proces</span>
+        </div>
+        <h3 class="text-3xl lg:text-4xl mb-4" style="font-family: var(--font-heading); color: var(--color-ink); font-weight: 300;">
+          Van idee tot eindresultaat in <em style="color: var(--color-forest);">vier stappen</em>
+        </h3>
+        <p class="text-sm leading-relaxed" style="color: var(--color-muted); font-family: var(--font-body); font-weight: 300;">
+          Persoonlijk contact van begin tot eind. Geen vragenlijsten en formulieren, gewoon één aanspreekpunt: Roos zelf.
+        </p>
+      </div>
+
+      <div class="lg:col-span-8">
+        <div class="space-y-0">
+          {[
+            { step: '01', title: 'Eerste contact', desc: 'Stuur een bericht via WhatsApp, e-mail of het contactformulier. Vertel waar je aan denkt — geen idee is te klein of te groot.', time: 'Reactie binnen 24u' },
+            { step: '02', title: 'Ontwerp & proefexemplaar', desc: 'We maken samen het ontwerp en sturen een proefexemplaar zodat je het in handen hebt vóór je definitief bestelt.', time: '3–5 werkdagen' },
+            { step: '03', title: 'Productie op maat', desc: 'Na akkoord gaat alles met de hand in productie. Kleine series vanaf 10 stuks tot grote bestellingen van honderden.', time: '1–3 weken' },
+            { step: '04', title: 'Afhalen of bezorgen', desc: 'Afhalen in Grijpskerke, Kloetinge of Burgh-Haamstede zonder kosten. Verzenden via PostNL, snel en veilig verpakt.', time: 'Op afspraak' },
+          ].map((step) => (
+            <div class="grid grid-cols-12 gap-4 py-8 border-t" style="border-color: var(--color-sand-dark);">
+              <div class="col-span-2">
+                <span class="block text-2xl font-light" style="color: var(--color-sage); font-family: var(--font-heading);">{step.step}</span>
+              </div>
+              <div class="col-span-10 lg:col-span-7">
+                <h4 class="text-xl mb-2" style="font-family: var(--font-heading); color: var(--color-ink); font-weight: 400;">{step.title}</h4>
+                <p class="text-sm leading-relaxed" style="color: var(--color-ink-soft); font-family: var(--font-body); font-weight: 300;">{step.desc}</p>
+              </div>
+              <div class="col-span-12 lg:col-span-3 lg:text-right">
+                <span class="text-[11px] uppercase tracking-[0.15em]" style="color: var(--color-muted); font-family: var(--font-body);">{step.time}</span>
+              </div>
+            </div>
+          ))}
+          <div class="border-t" style="border-color: var(--color-sand-dark);"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

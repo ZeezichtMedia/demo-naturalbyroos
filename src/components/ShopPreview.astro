@@ -1,0 +1,66 @@
+---
+const products = [
+  { image: '/images/soap-1.jpg', name: 'Blue Berry conditioner', category: 'Loveli', price: '€9,95' },
+  { image: '/images/body-cream-rice.jpg', name: 'Body Cream Rice Flower', category: 'Loveli', price: '€15,00' },
+  { image: '/images/body-cream-orange.jpg', name: 'Body Cream Sunny Orange', category: 'Loveli', price: '€15,00' },
+  { image: '/images/soap-2.jpg', name: 'Kokos conditioner bar', category: 'Loveli', price: '€9,95' },
+  { image: '/images/rescue-balm.jpg', name: 'Rescue Balm', category: 'Loveli', price: '€9,50' },
+  { image: '/images/giftset.jpg', name: 'Conditioner aanbieding', category: 'Giftset', price: '€6,50' },
+];
+---
+
+<section id="shop" class="py-32 lg:py-40" style="background: var(--color-cream);">
+  <div class="max-w-[1440px] mx-auto px-6 lg:px-12">
+
+    <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-16">
+      <div class="max-w-xl">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="block w-10 h-px" style="background: var(--color-sage);"></span>
+          <span class="section-label">De shop · 01</span>
+        </div>
+        <h2 class="text-[clamp(2.5rem,5vw,4.5rem)] leading-[1.05]" style="font-family: var(--font-heading); color: var(--color-ink); font-weight: 300;">
+          Onze <em style="color: var(--color-forest);">favorieten</em><br/>uit het assortiment.
+        </h2>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="#shop" class="text-sm font-medium border-b pb-1 transition-opacity hover:opacity-60"
+           style="color: var(--color-ink); font-family: var(--font-body); border-color: var(--color-ink);">
+          Bekijk de hele shop
+        </a>
+      </div>
+    </div>
+
+    <!-- Product carousel/grid -->
+    <div class="grid grid-cols-2 lg:grid-cols-6 gap-x-4 gap-y-10">
+      {products.map(product => (
+        <article class="group cursor-pointer">
+          <div class="relative aspect-square mb-4 overflow-hidden rounded-[2px]" style="background: var(--color-white);">
+            <img src={product.image} alt={product.name}
+                 class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+            <button class="absolute top-3 right-3 w-8 h-8 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-200"
+                    style="background: var(--color-white);" aria-label="Toevoegen">
+              <svg class="w-3.5 h-3.5" style="color: var(--color-ink);" viewBox="0 0 20 20" fill="currentColor"><path d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z"/></svg>
+            </button>
+          </div>
+          <div class="space-y-1">
+            <p class="text-[10px] uppercase tracking-[0.15em]" style="color: var(--color-sage); font-family: var(--font-body);">{product.category}</p>
+            <h3 class="text-sm leading-snug" style="color: var(--color-ink); font-family: var(--font-body); font-weight: 500;">{product.name}</h3>
+            <p class="text-sm" style="color: var(--color-forest); font-family: var(--font-heading);">{product.price}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <!-- Brand strip -->
+    <div class="mt-20 pt-10 border-t" style="border-color: var(--color-sand-dark);">
+      <p class="text-[10px] uppercase tracking-[0.18em] mb-6 text-center" style="color: var(--color-muted); font-family: var(--font-body);">Merken die wij voeren</p>
+      <div class="flex flex-wrap items-center justify-center gap-x-12 gap-y-4">
+        {['Natural ByRoos', 'Loveli', 'Beesha', 'Cosmeau', 'Bamboozy', 'Ben&Anna', 'Shampoobars'].map(brand => (
+          <span class="text-base lg:text-lg italic" style="color: var(--color-ink-soft); font-family: var(--font-heading); font-weight: 300;">
+            {brand}
+          </span>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

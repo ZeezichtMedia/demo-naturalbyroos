@@ -1,0 +1,83 @@
+---
+const useCases = [
+  { title: 'Bruiloften', count: '50–200 stuks', desc: 'Bedankzeepjes met namen en datum', image: '/images/personalised-soap-real.jpg' },
+  { title: 'Bedrijfsevent', count: 'Vanaf 25 stuks', desc: 'Gepersonaliseerd met bedrijfslogo', image: '/images/giftset.jpg' },
+  { title: 'Afstudeercadeau', count: '10–50 stuks', desc: 'Uniek cadeau voor de klas', image: '/images/ambachtelijke-zeep.jpg' },
+  { title: 'Duurzaam MVO', count: 'Bulk bestelling', desc: 'Jaarlijks relatiegeschenk', image: '/images/shop-display.jpg' },
+];
+---
+
+<section id="zakelijk" class="py-32 lg:py-40 relative overflow-hidden" style="background: var(--color-forest);">
+
+  <!-- Subtle texture -->
+  <div class="absolute inset-0 pointer-events-none opacity-[0.05]"
+       style="background-image: url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E&quot;);"></div>
+
+  <div class="max-w-[1440px] mx-auto px-6 lg:px-12 relative">
+    <div class="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+
+      <!-- Left content -->
+      <div class="lg:col-span-5 space-y-10 lg:sticky lg:top-32">
+        <div>
+          <div class="flex items-center gap-3 mb-6">
+            <span class="block w-10 h-px" style="background: var(--color-amber-light);"></span>
+            <span class="text-[11px] uppercase tracking-[0.18em]" style="color: var(--color-amber-light); font-family: var(--font-body);">Voor bedrijven · 03</span>
+          </div>
+          <h2 class="text-[clamp(2.5rem,5vw,4.5rem)] leading-[1.05]" style="font-family: var(--font-heading); color: var(--color-white); font-weight: 300;">
+            Maak indruk op<br/><em style="color: var(--color-amber-light);">jouw relaties.</em>
+          </h2>
+        </div>
+
+        <p class="text-base lg:text-lg leading-[1.7]" style="color: rgba(255,255,255,0.7); font-family: var(--font-body); font-weight: 300;">
+          Personeelscadeaus, klantgeschenken en merchandise met jouw huisstijl. Duurzame producten die mensen écht gebruiken — en die jouw naam dragen.
+        </p>
+
+        <ul class="space-y-3">
+          {[
+            'Minimaal 10 stuks per artikel',
+            'Eigen logo, tekst en kleurkeuze',
+            'Gecertificeerd duurzaam & vegan',
+            'Factuur op bedrijfsnaam',
+            'Persoonlijk contact via Roos',
+          ].map(item => (
+            <li class="flex items-start gap-3 py-2 border-t" style="border-color: rgba(255,255,255,0.1);">
+              <svg class="w-4 h-4 flex-shrink-0 mt-0.5" style="color: var(--color-amber-light);" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd"/></svg>
+              <span class="text-sm" style="color: rgba(255,255,255,0.85); font-family: var(--font-body);">{item}</span>
+            </li>
+          ))}
+          <li class="border-t" style="border-color: rgba(255,255,255,0.1);"></li>
+        </ul>
+
+        <div class="flex flex-wrap items-center gap-x-6 gap-y-3 pt-2">
+          <a href="#contact" class="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-medium transition-all duration-300 hover:-translate-y-0.5"
+             style="background: var(--color-amber); color: white; font-family: var(--font-body);">
+            Offerte aanvragen
+            <svg class="w-3.5 h-3.5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clip-rule="evenodd"/></svg>
+          </a>
+          <a href="mailto:info@naturalbyroos.nl" class="text-sm font-medium border-b pb-1 transition-opacity hover:opacity-60"
+             style="color: rgba(255,255,255,0.85); font-family: var(--font-body); border-color: rgba(255,255,255,0.5);">
+            Direct mailen
+          </a>
+        </div>
+      </div>
+
+      <!-- Right: editorial cards -->
+      <div class="lg:col-span-7 grid grid-cols-2 gap-4">
+        {useCases.map((card, idx) => (
+          <article class={`group cursor-pointer ${idx % 2 === 1 ? 'lg:translate-y-12' : ''}`}>
+            <div class="relative aspect-[4/5] overflow-hidden rounded-[2px] mb-3" style="background: rgba(255,255,255,0.05);">
+              <img src={card.image} alt={card.title}
+                   class="absolute inset-0 w-full h-full object-cover opacity-90 transition-transform duration-700 group-hover:scale-105 group-hover:opacity-100" />
+              <div class="absolute inset-0" style="background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.5) 100%);"></div>
+              <div class="absolute inset-x-0 bottom-0 p-5 text-white">
+                <span class="text-[10px] uppercase tracking-[0.18em] block mb-1" style="color: var(--color-amber-light); font-family: var(--font-body);">{card.count}</span>
+                <h4 class="text-xl mb-1" style="font-family: var(--font-heading); font-weight: 400;">{card.title}</h4>
+                <p class="text-[12px] opacity-80" style="font-family: var(--font-body);">{card.desc}</p>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

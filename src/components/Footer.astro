@@ -1,0 +1,126 @@
+---
+---
+<footer class="pt-20 pb-10" style="background: var(--color-ink);">
+  <div class="max-w-[1440px] mx-auto px-6 lg:px-12">
+
+    <!-- Top: Newsletter -->
+    <div class="grid lg:grid-cols-2 gap-12 pb-16 mb-16 border-b" style="border-color: rgba(255,255,255,0.08);">
+      <div>
+        <h3 class="text-3xl lg:text-4xl mb-3" style="font-family: var(--font-heading); color: white; font-weight: 300;">
+          Blijf op de hoogte
+        </h3>
+        <p class="text-sm leading-relaxed max-w-md" style="color: rgba(255,255,255,0.5); font-family: var(--font-body); font-weight: 300;">
+          Nieuwe producten, workshops en aanbiedingen — eerst in jouw inbox. Geen spam, alleen wat we zelf ook leuk vinden.
+        </p>
+      </div>
+      <form class="flex gap-2" onsubmit="return false;">
+        <input type="email" placeholder="jouw@email.nl"
+               class="flex-1 px-4 py-3 text-sm rounded-[2px] outline-none transition-colors duration-200"
+               style="background: rgba(255,255,255,0.05); color: white; border: 1px solid rgba(255,255,255,0.1); font-family: var(--font-body);" />
+        <button type="submit" class="px-6 py-3 text-sm font-medium rounded-[2px] transition-all duration-200 hover:opacity-90"
+                style="background: var(--color-amber); color: white; font-family: var(--font-body);">
+          Aanmelden
+        </button>
+      </form>
+    </div>
+
+    <!-- Main grid -->
+    <div class="grid lg:grid-cols-12 gap-12 mb-16">
+
+      <!-- Brand column -->
+      <div class="lg:col-span-4 space-y-5">
+        <div class="flex items-center gap-3">
+          <img src="/images/NaturalByRoos_Logo_Rond.jpg" alt="Natural ByRoos"
+               class="w-12 h-12 rounded-full object-cover" />
+          <div>
+            <span class="block text-base font-medium leading-tight" style="color: white; font-family: var(--font-body);">Natural ByRoos</span>
+            <span class="block text-[10px] uppercase tracking-[0.18em] mt-1" style="color: var(--color-sage-light); font-family: var(--font-body);">Duurzaam dichtbij</span>
+          </div>
+        </div>
+        <p class="text-sm leading-relaxed max-w-xs" style="color: rgba(255,255,255,0.4); font-family: var(--font-body); font-weight: 300;">
+          Handgemaakte, duurzame verzorgingsproducten uit Zeeland. Met aandacht voor mensen en de aarde, sinds 2021.
+        </p>
+        <div class="flex items-center gap-3 pt-2">
+          {['instagram', 'facebook', 'whatsapp'].map(social => (
+            <a href="#" class="w-9 h-9 rounded-full flex items-center justify-center transition-all duration-200"
+               style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);"
+               aria-label={social}>
+              <span class="text-[10px] uppercase tracking-wider" style="color: rgba(255,255,255,0.6); font-family: var(--font-body);">{social.charAt(0).toUpperCase()}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <!-- Shop -->
+      <div class="lg:col-span-2">
+        <h4 class="text-[10px] font-semibold uppercase tracking-[0.18em] mb-5" style="color: rgba(255,255,255,0.4); font-family: var(--font-body);">Shop</h4>
+        <ul class="space-y-3">
+          {['Cadeaus', 'Natural ByRoos', 'Loveli', 'Beesha', 'Cosmeau', 'Accessoires'].map(item => (
+            <li>
+              <a href="#" class="text-sm transition-colors duration-150 footer-link"
+                 style="color: rgba(255,255,255,0.6); font-family: var(--font-body);">{item}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Personalisatie -->
+      <div class="lg:col-span-3">
+        <h4 class="text-[10px] font-semibold uppercase tracking-[0.18em] mb-5" style="color: rgba(255,255,255,0.4); font-family: var(--font-body);">Gepersonaliseerd</h4>
+        <ul class="space-y-3">
+          {['Zeep op maat', 'Zakjes badzout', 'Cadeauboxen', 'Voor bedrijven', 'Eigen productlijn'].map(item => (
+            <li>
+              <a href="#" class="text-sm transition-colors duration-150 footer-link"
+                 style="color: rgba(255,255,255,0.6); font-family: var(--font-body);">{item}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div class="lg:col-span-3">
+        <h4 class="text-[10px] font-semibold uppercase tracking-[0.18em] mb-5" style="color: rgba(255,255,255,0.4); font-family: var(--font-body);">Bezoek ons</h4>
+        <ul class="space-y-3 text-sm" style="color: rgba(255,255,255,0.6); font-family: var(--font-body);">
+          <li>Grijpskerke</li>
+          <li>Kloetinge</li>
+          <li>Burgh-Haamstede</li>
+          <li class="pt-2">
+            <a href="mailto:info@naturalbyroos.nl" class="footer-link transition-colors duration-150">info@naturalbyroos.nl</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Bottom -->
+    <div class="pt-8 border-t flex flex-col md:flex-row items-center justify-between gap-4" style="border-color: rgba(255,255,255,0.08);">
+      <p class="text-[11px]" style="color: rgba(255,255,255,0.3); font-family: var(--font-body);">
+        © 2025 Natural ByRoos · Sinds 2021 · KvK 81623259
+      </p>
+      <div class="flex items-center gap-6">
+        {['Privacy', 'Voorwaarden', 'Retour & garantie'].map(item => (
+          <a href="#" class="text-[11px] uppercase tracking-[0.1em] footer-link transition-colors duration-150"
+             style="color: rgba(255,255,255,0.3); font-family: var(--font-body);">{item}</a>
+        ))}
+      </div>
+      <p class="text-[11px]" style="color: rgba(255,255,255,0.3); font-family: var(--font-body);">
+        Demo door
+        <a href="https://agensea.nl" target="_blank" rel="noopener noreferrer"
+           class="footer-link transition-colors duration-150 ml-1"
+           style="color: rgba(255,255,255,0.5);">Agensea</a>
+      </p>
+    </div>
+
+    <!-- Demo banner -->
+    <div class="mt-8 pt-6 border-t text-center" style="border-color: rgba(255,255,255,0.05);">
+      <p class="text-[10px] uppercase tracking-[0.2em]" style="color: rgba(255,255,255,0.2); font-family: var(--font-body);">
+        Dit is een concept-demo · Niet de live website van naturalbyroos.nl
+      </p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer-link:hover {
+    color: white !important;
+  }
+</style>
