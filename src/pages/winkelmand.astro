@@ -175,7 +175,15 @@ import Layout from '../layouts/Layout.astro';
     document.getElementById('page-shipping-text').textContent = remaining > 0 ? `Nog ${fmt(remaining)} tot gratis verzending` : '✓ Gratis verzending';
   }
 
-  document.addEventListener('DOMContentLoaded', render);
-  window.addEventListener('cart:updated', render);
+  function start() {
+    if (window.NBRCart) {
+      render();
+      window.addEventListener('cart:updated', render);
+    } else {
+      setTimeout(start, 30);
+    }
+  }
+  if (document.readyState !== 'loading') start();
+  else document.addEventListener('DOMContentLoaded', start);
 })();
 </script>

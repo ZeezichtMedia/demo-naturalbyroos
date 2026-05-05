@@ -212,7 +212,15 @@ import Layout from '../layouts/Layout.astro';
   document.getElementById('place-order')?.addEventListener('click', placeOrder);
   document.getElementById('place-order-desk')?.addEventListener('click', placeOrder);
 
-  document.addEventListener('DOMContentLoaded', render);
-  window.addEventListener('cart:updated', render);
+  function start() {
+    if (window.NBRCart) {
+      render();
+      window.addEventListener('cart:updated', render);
+    } else {
+      setTimeout(start, 30);
+    }
+  }
+  if (document.readyState !== 'loading') start();
+  else document.addEventListener('DOMContentLoaded', start);
 })();
 </script>
